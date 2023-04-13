@@ -1,6 +1,255 @@
 \documentclass{article}
-
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{references.bib}
 
 \begin{document}
+
+
+\newcommand{\mathstop}{\text{ .}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\rng}{\operatorname{rng}}
+\newcommand{\Gam}{\mathsf{Gam}}
+\newcommand{\Mate}{\mathsf{Mate}}
+\newcommand{\Par}{\mathsf{Par}}
+\newcommand{\Fert}{\mathsf{Fert}}
+\newcommand{\Loc}{\mathsf{Loc}}
+\newcommand{\Lin}{\mathsf{Lin}}
+\newcommand{\Leg}{\mathsf{Leg}}
+\newcommand{\Nodes}{\mathsf{Nodes}}
+
+
+\begin{abstract}
+\textbf{STAGE:} WORKING DRAFT
+
+\textbf{DOCUMENT TYPE:} Definition Document
+
+\textbf{OBJECTIVES}
+
+\begin{itemize}
+\item
+  Formal mathematical definition to be used in stochastic process model
+  under development.
+\item
+  Solicit feedback, in particular, on choice of wording for definitions.
+\item
+  Precise mathematical definitions for technical discussions relating to
+  ancestral recombination graphs
+\end{itemize}
+\end{abstract}
+
+
+\section{Gametic genealogy}
+
+A \emph{gametic genealogy} is a convenient mathematical formalism of the
+genealogy of a population from the perspective of gametes.
+Mathematically, it is a quadruple \[
+(\Gam, \Mate, \Par, \Fert) 
+\] with components
+
+\begin{itemize}
+\tightlist
+\item
+  \(\Gam\), the set of underlying gametes,
+\item
+  \(\Mate\), the set of zygotes formed by the fusion of egg gametes and
+  sperm gametes,
+\item
+  \(\Par\), a mapping from child gametes to parent zygotes, and
+\item
+  \(\Fert\), a mapping from zygotes to fertilization time.
+\end{itemize}
+
+For convenience, given a \emph{gametic genealogy},
+
+\begin{itemize}
+\tightlist
+\item
+  \(\Gam_0\) denotes the set of egg gametes,
+\item
+  \(\Gam_1\) denotes the set of sperm gametes, and
+\item
+  \(\Mate_*\) denotes the mapping from gametes to the zygotes they
+  formed during fertilization.
+\end{itemize}
+
+Formally, a \emph{gametic genealogy} must satisfy the following
+conditions.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(\Gam_0 \cup \Gam_1 = \Gam\) and \(\Gam_0 \cap \Gam_1 = \emptyset\).
+\item
+  \(\Mate \subset \Gam_0 \times \Gam_1\) and forms a one-to-one mapping
+  between \(\Gam_0\) and \(\Gam_1\).
+\item
+  \(\Par\) is a function \(C \mapsto \Mate\), where \(C\) is a subset of
+  \(\Gam\) representing child gametes.
+\item
+  \(\Fert\) is a function \(\Mate \mapsto \mathbb{R}\) such that for all
+  child gametes \(g \in \dom \Par\), \[
+  \Fert(\Mate_*(g)) > \Fert(\Par(g))
+  \mathstop
+  \] \(\dom \Par\) denotes the domain of \(\Par\), that is, the set of
+  child gametes.
+\end{enumerate}
+
+\section{Gametic lineage space}
+
+A \emph{gametic lineage space} is a mathematical formalism representing
+the lines of transmission of genetic information via gametes of a
+population over time. It is a triplet \[
+(\Loc, G, \Lin) 
+\] where
+
+\begin{itemize}
+\item
+  \(\Loc\) is the set of all genomic locations,
+\item
+  \(G\) is a gametic genealogy \((\Gam, \Mate, \Par, \Fert)\), and
+\item
+  \(\Lin\) is a function \(\Loc \times \Gam \mapsto 2^\Gam\) mapping a
+  genomic position in a gamete to the set of gametes that transmitted
+  genetic information to that position in that gamete.
+\end{itemize}
+
+For every location \(\ell \in \Loc\) and gamete \(g \in \Gam\),
+\(\Lin(\ell, g)\) is the lineage ending at gamete \(g\) via locus
+\(\ell\) and it must satisfy the condition \[
+\Lin(\ell, g) = \{g\} \cup \Lin(\ell, \Par(g)_i) \text{ for either $i=0$ or $i=1$}
+\] when \(g \in \dom \Par\), otherwise \(\Lin(\ell, g) = \{g\}\).
+
+\(\Par(g)_0\) and \(\Par(g)_1\) are the maternal and paternal gametes,
+respectively, that fertilized the parent of \(g\).
+
+\section{Stochastic gametic lineage space}
+
+A \emph{stochastic gametic lineage space} is a gametic lineage space
+extended to model a random gametic lineage.
+
+From a stochastic gametic linage space, a time-indexed family of
+probability distributions \(\{ P_t \}_{t \in I}\) is induced.
+
+\begin{quote}
+TO DO: Need to rework space formalism to clarify over what is the
+\(\sigma\)-algebra:
+\href{https://gitlab.com/castedo/study-docs/-/issues/42}{issues \#42}.
+\end{quote}
+
+For convenience we define the set of all lineages that contain a gamete
+\(g \in \Gam\) as \[
+B(g) := \{ \Lin(\ell, s) : g \in \Lin(\ell,s), \ell \in \Loc, s \in \Gam \}
+\mathstop
+\]
+
+Formally, a \emph{stochastic gametic lineage space} is a quintuple \[
+(G, I, \{ S_i \}_{i \in I}, \mathcal{F}, \mu)
+\] where
+
+\begin{itemize}
+\item
+  \(G\) is a gametic lineage space
+  \((\Loc, (\Gam, \Mate, \Par, \Fert), \Lin)\)
+\item
+  \(I\) is an index set of points in time with \(\rng \Fert \subset I\),
+\item
+  \(\{S_t\}_{t \in I}\) is a time-indexed collection of sets of living
+  zygotes,
+\item
+  \(\mathcal{F}\) is a \(\sigma\)-algebra (\(sigma\)-field) over
+  \(\rng \Lin\), and
+\item
+  \(\mu\) is a measure on \(\mathcal{F}\)
+\end{itemize}
+
+which satisfy the following conditions
+
+\begin{itemize}
+\item
+  \(B(g) \in \mathcal{F}\) for all \(g \in \Gam\), and
+\item
+  \(\mu(S_t)\) is defined and finite for all \(t \in I\).
+\end{itemize}
+
+Every gametic lineage space induces a time-indexed family
+\(\{P_t\}_{t \in I}\) of probabilities spaces measurable on
+\(\sigma\)-algebra \(F\). This defines the probability of lineages which
+end in a zygote alive at time \(t\).
+
+\begin{quote}
+TO DO: Need to clarify relationship between \(F\) and \(\Loc\) and
+\(\Mate\) for when they are uncountable.
+\end{quote}
+
+\section{An embedded Ancestral Recombination Graph}
+
+An ancestral recombination graph \cite{friedman_ancestral_1997}
+\cite{hein_gene_2005} \cite{wakeley_coalescent_2009} of a sampled
+population is embedded in a gametic lineage space. We formally show the
+exact embedding using the gARG formalism \cite{wong_what_arg_2022}.
+
+We start by defining the \emph{genetic legacy} of a gamete
+\(g \in \Gam\) for sample population \(S \subseteq \Gam\) to be \[
+  \Leg(g, S) := \{ (\ell, d) \in \Loc \times S : g \in \Lin(\ell, d) \}
+\mathstop
+\] This genetic legacy is the genetic material that survives in the
+sample population \(S\) originally copied from ancestral gamete \(g\)
+(with or without mutations).
+
+Genetic legacy for a sample population \(S\) induces the following
+equivalence relationship over pairs of gametes \(g_1\) and \(g_2\) in
+\(\Gam\): \[
+g_1 \simeq_S g_2 \ := \ \Leg(g_1, S) = \Leg(g_2, S)
+\mathstop
+\] We denote the resulting equivalence class containing \(g \in \Gam\)
+as \[
+{[g]}_S \ := \ \{ g' : \Leg(g', S) = \Leg(g, S) \}
+\mathstop
+\]
+
+In this equivalence relationship, gametes are considered equivalent if
+they have the same genetic legacy for the sample population \(S\).
+
+A convenient choice for an embedded gARG \cite{wong_what_arg_2022} is
+to set the gARG nodes (vertices) to be the equivalence classes: \[
+   \Nodes(S) := \{ {[g]}_S : g \in \Gam \}
+\mathstop
+\]
+
+The (unannotated) graph edges of the gARG are chosen as child-parent
+node pairs \((C, P) \in \Nodes(S)^2\) where \[
+  \Par(g)_i \in P \text{ for some $g \in C$ and some $i \in \{0, 1\}$ .}
+\]
+
+In the gARG, annotations are added for each graph edge (pair of child
+and parent nodes). This annotation is the set of locations through which
+genetic information has been copied from parent to child. In the
+following interpretation, the only locations of interest are those for
+which genetic information has been transmitted into the sample
+population \(S\). With this interpretation, the annotation for edge
+\((C,P)\) is \[
+  \{ \ell \in \Loc :
+     C \cup P \subseteq \Lin(\ell, g) \text{ for some $g \in S$}
+  \}
+\mathstop
+\]
+
+\section{Acknowledgements}
+
+Thanks to Daria Shipilina and Nick Barton for sharing their preprint
+\cite{shipilina_origin_2022} and discussing the conjecture in edition
+0.1 of this document relating to their preprint.
+
+\section{Changes from edition 0.1}
+
+\begin{itemize}
+\tightlist
+\item
+  add section about embedded ARG
+\item
+  removed conjecture relating to \cite{shipilina_origin_2022}
+\end{itemize}
 
 \end{document}
