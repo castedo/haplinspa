@@ -8,13 +8,16 @@
 
 
 \newcommand{\mathstop}{\text{ .}}
+\renewcommand{\Pr}{\operatorname{\mathbb{P}}}
 \newcommand{\dom}{\operatorname{dom}}
 \newcommand{\rng}{\operatorname{rng}}
+\newcommand{\Hap}{\mathrm{Hap}}
+\newcommand{\Dip}{\mathrm{Dip}}
 \newcommand{\Gam}{\mathsf{Gam}}
 \newcommand{\Mate}{\mathsf{Mate}}
-\newcommand{\Par}{\mathsf{Par}}
-\newcommand{\Fert}{\mathsf{Fert}}
-\newcommand{\Loc}{\mathsf{Loc}}
+\newcommand{\Par}{\mathrm{Par}}
+\newcommand{\Fert}{\mathrm{Fert}}
+\newcommand{\Loc}{\mathrm{Loc}}
 \newcommand{\Lin}{\mathsf{Lin}}
 \newcommand{\Leg}{\mathsf{Leg}}
 \newcommand{\Nodes}{\mathsf{Nodes}}
@@ -23,24 +26,146 @@
 \begin{abstract}
 \textbf{STAGE:} WORKING DRAFT
 
-\textbf{DOCUMENT TYPE:} Definition Document
+\textbf{DOCUMENT TYPE:} Formal Mathematical Definition
 
 \textbf{OBJECTIVES}
 
 \begin{itemize}
 \item
-  Formal mathematical definition to be used in stochastic process model
-  under development.
-\item
-  Solicit feedback, in particular, on choice of wording for definitions.
+  Formal mathematical definition of stochastic process used by
+  statistical estimator of admixture timing under development.
 \item
   Precise mathematical definitions for technical discussions relating to
-  ancestral recombination graphs
+  ancestral recombination graphs.
 \end{itemize}
 \end{abstract}
 
 
+\section{Haploid index space}
+
+A haploid index space serves as a fixed non-stochastic basis over which additional
+stochastic structures are built.
+A specific haploid index is merely a placeholder for many possible gametes and haploid
+genomes. It indirectly represents a specific gamete or haploid genome only given an
+outcome of a stochastic process.
+
+A \emph{Haploid index space} is a tuple
+\[
+  (T, \Hap, \Dip, \Fert, \mathcal{A}, \mu)
+\]
+with components
+\begin{itemize}
+\item
+  $T$, an index set of numerical times (e.g. integers or reals),
+\item
+  $\Hap$, a set of (haploid) indices to distinct gametes,
+\item
+  $\Dip$, a set of pairs of haploid indices of egg and sperm gametes that fuse,
+\item
+  $\Fert$, a mapping from $\Dip$ to fertilization time,
+\item
+  $\mathcal{A}$, a $\sigma$-algebra over $\Hap$, and
+\item
+  $\mu$, a measure on $\mathcal{A}$ (which can be a simple count or a kind of ''mass'' of
+haploids).
+\end{itemize}
+
+For convenience, given a \emph{haploid index space},
+
+\begin{itemize}
+\item
+  $\Hap_0$ denotes the set of indices to egg gametes,
+\item
+  $\Hap_1$ denotes the set of indices to sperm gametes,
+\item
+  $\Dip_*$ denotes the mapping from haploid indices to the containing pair in $\Dip$,
+and
+\item
+  $\Fert_*$ denotes the function composition $\Fert \circ \Dip_*$.
+\end{itemize}
+
+Formally, a \emph{haploid index space} must satisfy the following
+conditions.
+
+\begin{enumerate}
+\item
+  $\Hap_0 \cup \Hap_1 = \Hap$ and $\Hap_0 \cap \Hap_1 = \emptyset$.
+\item
+  $\Dip \subset \Hap_0 \times \Hap_1$ and forms a one-to-one mapping
+  between $\Hap_0$ and $\Hap_1$,
+\item
+  $\Fert_*$ is a measurable function relative to $\mathcal{A}$ (and the Borel algebra)
+\end{enumerate}
+
+
+\section{Haploid lineage process}
+
+A haploid index space is fixed and not random. But it can be extended, with a
+probability space, to a stochastic process.
+
+Given 
+\begin{itemize}
+\item
+  a haploid index space $(T, \Hap, \Dip, \Fert, \mathcal{A}_H, \mu)$,
+\item
+  a measurable space $(\Loc, \mathcal{A}_L)$ of genomic locations,
+\item
+  and probability space $(\Omega, \mathcal{F}, \Pr)$,
+\end{itemize}
+a \emph{Haploid lineage process} is a stochastic process defined as a time-indexed family
+of three random variables
+$$
+ \left\{ (S_t, \Par_t, M_t) \right\}_{t \in T}
+\mathstop
+$$
+
+The values of $S_t$ are sets of haploid indices, specifically, measurable sets in
+$\mathcal{A}$. These represent all the haploid genomes of mature individuals living at
+time $t$. Various conditions much hold such as fertilization times being less than or
+equal to $t$ and once an individual ceases to be living, it can not rise from the dead.
+
+The values of $\Par_t$ are functions from a subset of $S_t$ to $\Dip$
+with the following conditions:
+\begin{enumerate}
+\item
+  every $\Par_t$ is measurable in terms of $\mathcal{A}$ and $\mathcal{F}$,
+\item
+  for each $t \in T$, the domain of $\Par_t$ ($\dom \Par$) is a subset of $S_t$, and
+\item
+  for every haploid $h \in \Hap$,
+$$
+  \Fert_*(h) > \Fert(\Par(h))
+\mathstop
+$$
+\end{enumerate}
+where $\Par$ is the union of all $\Par_t$.
+
+
+\begin{quote}
+TODO: pick a better name than $M_t$ for the following function
+\end{quote}
+
+Lastly, $M_t$ is a measurable function from $\Hap$ to subsets of $\Loc$
+representing the genome locations inherited from the maternal haploid genome of the
+parent generating a gamete.
+It follows that $(\Loc - M_t)$ is the subset of locations passed down from
+paternal haploid genomes of parents generating a gamete.
+
+
+\section{Random indices}
+
+Given a measure $\mu$ defined on $\mathcal{A}$,
+random index variables $\{ S_t \}_{t \in T}$ taking values in $\dom \Par_t$ uniformly
+(per $\mu$)
+with probability one conditional on $\Par_t$.
+
+
+
 \section{Gametic genealogy}
+
+\begin{quote}
+TODO: updated to be stochastic process on top of haploid index space.
+\end{quote}
 
 A \emph{gametic genealogy} is a convenient mathematical formalism of the
 genealogy of a population from the perspective of gametes.
