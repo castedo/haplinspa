@@ -1,6 +1,14 @@
 \documentclass{article}
 \usepackage{amsmath, amssymb}
 \usepackage{hyperref}
+\usepackage{parskip}
+
+\usepackage{stmaryrd}
+\usepackage[utf8]{inputenc}
+\usepackage{newunicodechar}
+\newunicodechar{⟦}{\llbracket}
+\newunicodechar{⟧}{\rrbracket}
+
 \usepackage[backend=biber, style=numeric]{biblatex}
 \addbibresource{references.bib}
 
@@ -155,7 +163,7 @@ and for integers $i > 0$,
 $$
 a_{i+1} :=
   \begin{cases}
-    \left( \Par(a_i), ⟦ \ell \in \Pat(a_i) ⟧ \right) & \text{if } a_i \in \dom \Par  \\
+    \big( \Par(a_i) , ⟦ \ell \in \Pat(a_i) ⟧ \big) & \text{if } a_i \in \dom \Par  \\
     a_i & \text{otherwise.}
   \end{cases}
 $$
