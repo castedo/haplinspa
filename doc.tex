@@ -1,0 +1,239 @@
+\addbibresource{references.bib}
+
+\begin{document}
+
+
+\newcommand{\mathstop}{\text{ .}}
+\renewcommand{\Pr}{\operatorname{\mathbb{P}}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\Tim}{\mathrm{Tim}}
+\newcommand{\Hap}{\mathrm{Hap}}
+\newcommand{\Dip}{\mathrm{Dip}}
+\newcommand{\Par}{\mathrm{Par}}
+\newcommand{\Pat}{\mathrm{Pat}}
+\newcommand{\Fert}{\mathrm{Fert}}
+\newcommand{\Loc}{\mathrm{Loc}}
+\newcommand{\Lin}{\mathrm{Lin}}
+\newcommand{\Leg}{\mathrm{Leg}}
+\newcommand{\Nodes}{\mathrm{Nodes}}
+
+
+\begin{abstract}
+\textbf{STAGE:} WORKING DRAFT
+
+\textbf{DOCUMENT TYPE:} Formal Mathematical Definition
+
+\textbf{OBJECTIVES:}
+
+\begin{itemize}
+\item
+  Formal mathematical definition of stochastic process used by
+  statistical estimator of admixture timing under development.
+\item
+  Precise mathematical definitions for technical discussions relating to
+  ancestral recombination graphs.
+\end{itemize}
+\end{abstract}
+
+
+\section{Notation}
+
+\begin{itemize}
+\item
+  "$\dom f$" denotes the domain of function $f$
+\item
+  "$⟦ x \in S ⟧$" is Iverson bracket notation for the indicator function of $S$, namely
+$$
+⟦ x \in S ⟧ =
+  \begin{cases}
+    1 & \text{if } x \in S  \\
+    0 & \text{otherwise.}
+  \end{cases}
+$$
+
+\end{itemize}
+
+
+\section{Fertilization Function}
+
+A \emph{haploid lineage process} is formally defined in terms of a given
+fixed \emph{fertilization function}, which we denote with the symbol $\Fert$. This
+function maps possible occurrences of fertilization to points in time.
+
+From a given fertilization function $\Fert$, we define three convenient symbols:
+\begin{itemize}
+\item
+  $\Tim$: the range of $\Fert$ (a set of real numbers representing points in time),
+\item
+  $\Dip$: the domain of $\Fert$ (a set of possible diploid organisms), and
+\item
+  $\Hap$: the set $\Dip \times \{0, 1 \}$ representing fertilizing gametes.
+\end{itemize}
+
+For a diploid $d \in \Dip$, the members $(d, 0)$ and $(d, 1)$ of $\Hap$ index the
+fertilizing egg and sperm gametes, respectively.
+
+For convenience, we map $\Hap$ to fertilization times with:
+$$
+  \Fert_H((d, s)) := \Fert(d)
+$$
+for all $d \in \Dip$ and $s \in \{0, 1\}$.
+
+We denote the following inverse images as:
+$$
+\begin{aligned}
+\Dip_t & := \{ d \in \Dip : \Fert(d) = t \}  \\
+\Hap_t & := \{ d \in \Hap : \Fert_H(d) = t \}  \\
+\Dip_{<t} & := \{ d \in \Dip : \Fert(d) < t \}
+\mathstop
+\end{aligned}
+$$
+
+A technical requirement on any given $\Fert$ in this document is that $\Dip_t$ must be
+countable for every $t \in \Tim$.
+
+An example of a valid fertilization function is $\Fert : \mathbf{N}^2 \mapsto \mathbf{N}$
+where $\Fert( (t, n) ) = t$.
+
+
+\section{Haploid lineage process}
+
+Given 
+\begin{itemize}
+\item
+  a fertilization function $\Fert$,
+\item
+  a set $\Loc$ of genomic locations,
+\item
+  and probability space $(\Omega, \mathcal{F}, \Pr)$,
+\end{itemize}
+a \emph{Haploid lineage process} is a stochastic process defined by a time-indexed
+family of two random variables
+$$
+ \left\{ (\Par_t, \Pat_t) \right\}_{t \in \Tim}
+\mathstop
+$$
+
+Each $\Par_t$ is a random function from a subset of $\Hap_t$ to $\Dip_{<t}$.
+$\Par_t(h)$ represents the diploid \textbf{Par}ent that produced the haploid gamete $h$.
+
+Each $\Pat_t$ is a random function from the domain of $\Par_t$ to subsets of $\Loc$.
+$\Pat_t(h)$ represents the genome locations replicated into the gamete $h$
+from the \textbf{Pat}ernal haploid genome of the parent $\Par_t(h)$
+(inherited from the father of the parent producing the gamete).
+
+For convenience we define:
+$$
+\begin{aligned}
+\Par(h) & := \Par_t(h)  \\
+\Pat(h) & := \Pat_t(h)
+\end{aligned}
+$$
+where $t = \Fert_H(h)$.
+
+
+\section{Haploid lineages}
+
+A haploid lineage process induces a random function $\Lin$ which maps a genomic location
+in a descendant haploid genome to a haploid lineage.
+A haploid lineage consists of all the haploids transmitting genetic information via a
+genomic location to a descendant haploid.
+For every genomic location $\ell \in \Loc$ and haploid $h \in \Hap$, its haploid
+lineage is
+$$
+\Lin(\ell, h) := \bigcup_{i} \{ a_i \}
+$$
+where $a_i$ is defined inductively as follows:
+$$
+a_0 := h
+$$
+and for integers $i > 0$,
+$$
+a_{i+1} :=
+  \begin{cases}
+    \big( \Par(a_i) , ⟦ \ell \in \Pat(a_i) ⟧ \big) & \text{if } a_i \in \dom \Par  \\
+    a_i & \text{otherwise.}
+  \end{cases}
+$$
+
+
+\section{An embedded Ancestral Recombination Graph}
+
+An ancestral recombination graph \cite{friedman_ancestral_1997}
+\cite{hein_gene_2005} \cite{wakeley_coalescent_2009} of a sampled
+population is embedded in any outcome of any haploid lineage process.
+We formally show the
+exact embedding using the gARG formalism \cite{wong_what_arg_2022}.
+
+We start by defining the \emph{genetic legacy} of an ancestral haploid
+$h \in \Hap$ for sample population $S \subseteq \Hap$ to be
+$$
+  \Leg(h, S) := \{ (\ell, d) \in \Loc \times S : h \in \Lin(\ell, d) \}
+\mathstop
+$$
+
+This genetic legacy is the genetic material that survives in the
+sample population $S$ originally copied from ancestral haploid $h$
+(with or without mutations).
+
+Genetic legacy for a sample population $S$ induces the following
+equivalence relationship over pairs of haploids $h_1$ and $h_2$ in
+$\Hap$:
+$$
+h_1 \simeq_S h_2 \ := \ \Leg(h_1, S) = \Leg(h_2, S)
+\mathstop
+$$
+We denote the resulting equivalence class containing $h \in \Hap$ as
+$$
+{[h]}_S \ := \ \{ h' : \Leg(h', S) = \Leg(h, S) \}
+\mathstop
+$$
+
+In this equivalence relationship, haploids are considered equivalent if
+they have the same genetic legacy for the sample population $S$.
+
+A convenient choice for an embedded gARG \cite{wong_what_arg_2022} is
+to set the gARG nodes (vertices) to be the equivalence classes:
+$$
+   \Nodes(S) := \{ {[h]}_S : h \in \Hap \}
+\mathstop
+$$
+
+The (unannotated) graph edges of the gARG are chosen as child-parent
+node pairs $(C, P) \in \Nodes(S)^2$ where
+$$
+  (\Par(h), i) \in P \text{ for some $h \in C$ and some $i \in \{0, 1\}$ .}
+$$
+
+In the gARG, annotations are added for each graph edge (pair of child
+and parent nodes). This annotation is the set of locations through which
+genetic information has been copied from parent to child. In the
+following interpretation, the only locations of interest are those for
+which genetic information has been transmitted into the sample
+population $S$. With this interpretation, the annotation for edge
+$(C,P)$ is
+$$
+  \{ \ell \in \Loc :
+     C \subseteq \Lin(\ell, h) \text{ and } P \subseteq \Lin(\ell, h) \text{ for some $h \in S$}
+  \}
+\mathstop
+$$
+
+\section{Acknowledgements}
+
+Thanks to Daria Shipilina and Nick Barton for sharing their preprint
+\cite{shipilina_origin_2022} and discussing the conjecture in edition
+0.1 of this document relating to their preprint.
+
+\section{Changes from edition 0.1}
+
+\begin{itemize}
+\item
+  add section about embedded ARG
+\item
+  removed conjecture relating to \cite{shipilina_origin_2022}
+\end{itemize}
+
+
+\printbibliography % used by LaTeX but not pandoc
+\end{document}
