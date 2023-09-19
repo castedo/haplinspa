@@ -2,6 +2,8 @@
 # and provides all the data and references to post a public edition of this document.
 
 input-file: ${.}/doc.tex
+resource-path:
+- ${.}
 metadata:
   title: "Haploid lineage process"
   date: 2023-04-24
