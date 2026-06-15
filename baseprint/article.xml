@@ -1,0 +1,430 @@
+<article xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <front>
+    <article-meta>
+      <title-group>
+        <article-title>Haploid lineage process</article-title>
+      </title-group>
+      <contrib-group>
+        <contrib contrib-type="author">
+          <contrib-id contrib-id-type="orcid">https://orcid.org/0000-0002-5014-4809</contrib-id>
+          <name>
+            <surname>Ellerman</surname>
+            <given-names>E. Castedo</given-names>
+          </name>
+          <email>castedo@castedo.com</email>
+        </contrib>
+      </contrib-group>
+      <permissions>
+        <copyright-statement>© 2023, Ellerman et al</copyright-statement>
+      <license>
+        <ali:license_ref>https://creativecommons.org/licenses/by/4.0/</ali:license_ref>
+        <license-p>This document is distributed under a Creative Commons Attribution 4.0 International license.</license-p>
+      </license>
+      </permissions>
+      <abstract>
+<p><bold>STAGE:</bold> WORKING DRAFT</p>
+<p><bold>DOCUMENT TYPE:</bold> Formal Mathematical Definition</p>
+<p><bold>OBJECTIVES:</bold></p>
+<list list-type="bullet">
+  <list-item>
+    <p>Formal mathematical definition of stochastic process used by
+    statistical estimator of admixture timing under development.</p>
+  </list-item>
+  <list-item>
+    <p>Precise mathematical definitions for technical discussions relating to
+    ancestral recombination graphs.</p>
+  </list-item>
+</list>
+      </abstract>
+    </article-meta>
+  </front>
+  <body>
+<sec id="notation">
+  <title>Notation</title>
+  <list list-type="bullet">
+    <list-item>
+      <p>&quot;<inline-formula><alternatives>
+      <tex-math><![CDATA[\operatorname{dom}f]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo>dom</mml:mo><mml:mi>f</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>&quot; denotes the domain of function <inline-formula><alternatives>
+      <tex-math><![CDATA[f]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>f</mml:mi></mml:math></alternatives></inline-formula></p>
+    </list-item>
+    <list-item>
+      <p>&quot;<inline-formula><alternatives>
+      <tex-math><![CDATA[⟦ x \in S ⟧]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="false" form="prefix">⟦</mml:mo><mml:mi>x</mml:mi><mml:mo>∈</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="false" form="postfix">⟧</mml:mo></mml:mrow></mml:math></alternatives></inline-formula>&quot; is Iverson bracket notation for the indicator function of <inline-formula><alternatives>
+      <tex-math><![CDATA[S]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>S</mml:mi></mml:math></alternatives></inline-formula>, namely
+      <disp-formula><alternatives>
+      <tex-math><![CDATA[⟦ x \in S ⟧ =
+        \begin{cases}
+          1 & \text{if } x \in S  \\
+          0 & \text{otherwise.}
+        \end{cases}]]></tex-math>
+      <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="false" form="prefix">⟦</mml:mo><mml:mi>x</mml:mi><mml:mo>∈</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="false" form="postfix">⟧</mml:mo><mml:mo>=</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">{</mml:mo><mml:mtable><mml:mtr><mml:mtd columnalign="left" style="text-align: left"><mml:mn>1</mml:mn></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mrow><mml:mtext mathvariant="normal">if </mml:mtext><mml:mspace width="0.333em"></mml:mspace></mml:mrow><mml:mi>x</mml:mi><mml:mo>∈</mml:mo><mml:mi>S</mml:mi></mml:mtd></mml:mtr><mml:mtr><mml:mtd columnalign="left" style="text-align: left"><mml:mn>0</mml:mn></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mtext mathvariant="normal">otherwise.</mml:mtext></mml:mtd></mml:mtr></mml:mtable></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+    </list-item>
+  </list>
+</sec>
+<sec id="fertlization-function">
+  <title>Fertlization Function</title>
+  <p>A <italic>haploid lineage process</italic> is formally defined in terms of a given
+  fixed <italic>fertilization function</italic>, which we denote with the symbol <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Fert}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>. This
+  function maps possible occurrences of fertilization to points in time.</p>
+  <p>From a given fertilization function <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Fert}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>, we define three convenient symbols:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p><inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Tim}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">T</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">m</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>: the range of <inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Fert}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> (a set of real numbers representing points in time),</p>
+    </list-item>
+    <list-item>
+      <p><inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Dip}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>: the domain of <inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Fert}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> (a set of possible diploid organisms), and</p>
+    </list-item>
+    <list-item>
+      <p><inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Hap}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>: the set <inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Dip}\times \{0, 1 \}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mo>×</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mn>1</mml:mn><mml:mo stretchy="false" form="postfix">}</mml:mo></mml:mrow></mml:math></alternatives></inline-formula> representing fertilizing gametes.</p>
+    </list-item>
+  </list>
+  <p>For a diploid <inline-formula><alternatives>
+  <tex-math><![CDATA[d \in \mathrm{Dip}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>d</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>, the members <inline-formula><alternatives>
+  <tex-math><![CDATA[(d, 0)]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>d</mml:mi><mml:mo>,</mml:mo><mml:mn>0</mml:mn><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:math></alternatives></inline-formula> and <inline-formula><alternatives>
+  <tex-math><![CDATA[(d, 1)]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>d</mml:mi><mml:mo>,</mml:mo><mml:mn>1</mml:mn><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:math></alternatives></inline-formula> of <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Hap}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> index the
+  fertilizing egg and sperm gametes, respectively.</p>
+  <p>For convenience, we map <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Hap}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> to fertilization times with:
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Fert}_H((d, s)) := \mathrm{Fert}(d)]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mi>H</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>d</mml:mi><mml:mo>,</mml:mo><mml:mi>s</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>:=</mml:mo><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>d</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula>
+  for all <inline-formula><alternatives>
+  <tex-math><![CDATA[d \in \mathrm{Dip}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>d</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula> and <inline-formula><alternatives>
+  <tex-math><![CDATA[s \in \{0, 1\}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>s</mml:mi><mml:mo>∈</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mn>1</mml:mn><mml:mo stretchy="false" form="postfix">}</mml:mo></mml:mrow></mml:math></alternatives></inline-formula>.</p>
+  <p>We denote the following inverse images as:
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\begin{aligned}
+  \mathrm{Dip}_t & := \{ d \in \mathrm{Dip}: \mathrm{Fert}(d) = t \}  \\
+  \mathrm{Hap}_t & := \{ d \in \mathrm{Hap}: \mathrm{Fert}_H(d) = t \}  \\
+  \mathrm{Dip}_{<t} & := \{ d \in \mathrm{Dip}: \mathrm{Fert}(d) < t \}
+  \text{ .}
+  \end{aligned}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mtable><mml:mtr><mml:mtd columnalign="right" style="text-align: right"><mml:msub><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mo>:=</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mi>d</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mo>:</mml:mo><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>d</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mi>t</mml:mi><mml:mo stretchy="false" form="postfix">}</mml:mo></mml:mtd></mml:mtr><mml:mtr><mml:mtd columnalign="right" style="text-align: right"><mml:msub><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mo>:=</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mi>d</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mo>:</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mi>H</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>d</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mi>t</mml:mi><mml:mo stretchy="false" form="postfix">}</mml:mo></mml:mtd></mml:mtr><mml:mtr><mml:mtd columnalign="right" style="text-align: right"><mml:msub><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mrow><mml:mo>&lt;</mml:mo><mml:mi>t</mml:mi></mml:mrow></mml:msub></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mo>:=</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mi>d</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mo>:</mml:mo><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>d</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>&lt;</mml:mo><mml:mi>t</mml:mi><mml:mo stretchy="false" form="postfix">}</mml:mo><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mtd></mml:mtr></mml:mtable></mml:math></alternatives></disp-formula></p>
+  <p>A technical requirement on any given <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Fert}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> in this document is that <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Dip}_t]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub></mml:math></alternatives></inline-formula> must be
+  countable for every <inline-formula><alternatives>
+  <tex-math><![CDATA[t \in \mathrm{Tim}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>t</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">T</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">m</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>.</p>
+  <p>An example of a valid fertilization function is <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Fert}: \mathbf{N}^2 \mapsto \mathbf{N}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mo>:</mml:mo><mml:msup><mml:mi>𝐍</mml:mi><mml:mn>2</mml:mn></mml:msup><mml:mo>↦</mml:mo><mml:mi>𝐍</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>
+  where <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Fert}( (t, n) ) = t]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>t</mml:mi><mml:mo>,</mml:mo><mml:mi>n</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mi>t</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>.</p>
+</sec>
+<sec id="haploid-lineage-process">
+  <title>Haploid lineage process</title>
+  <p>Given</p>
+  <list list-type="bullet">
+    <list-item>
+      <p>a fertilization function <inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Fert}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>,</p>
+    </list-item>
+    <list-item>
+      <p>a set <inline-formula><alternatives>
+      <tex-math><![CDATA[\mathrm{Loc}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">c</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> of genomic locations,</p>
+    </list-item>
+    <list-item>
+      <p>and probability space <inline-formula><alternatives>
+      <tex-math><![CDATA[(\Omega, \mathcal{F}, \operatorname{\mathbb{P}})]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>Ω</mml:mi><mml:mo>,</mml:mo><mml:mi>ℱ</mml:mi><mml:mo>,</mml:mo><mml:mo>ℙ</mml:mo><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:math></alternatives></inline-formula>,</p>
+    </list-item>
+  </list>
+  <p>a <italic>Haploid lineage process</italic> is a stochastic process defined by a time-indexed
+  family of two random variables
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\left\{ (\mathrm{Par}_t, \mathrm{Pat}_t) \right\}_{t \in \mathrm{Tim}}
+  \text{ .}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">{</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub><mml:mo>,</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="true" form="postfix">}</mml:mo></mml:mrow><mml:mrow><mml:mi>t</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">T</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">m</mml:mi></mml:mrow></mml:mrow></mml:msub><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+  <p>Each <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Par}_t]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub></mml:math></alternatives></inline-formula> is a random function from a subset of <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Hap}_t]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub></mml:math></alternatives></inline-formula> to <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Dip}_{<t}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mrow><mml:mi mathvariant="normal">D</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mrow><mml:mo>&lt;</mml:mo><mml:mi>t</mml:mi></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>.
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Par}_t(h)]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula> represents the diploid <bold>Par</bold>ent that produced the haploid gamete <inline-formula><alternatives>
+  <tex-math><![CDATA[h]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>h</mml:mi></mml:math></alternatives></inline-formula>.</p>
+  <p>Each <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Pat}_t]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub></mml:math></alternatives></inline-formula> is a random function from the domain of <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Par}_t]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub></mml:math></alternatives></inline-formula> to subsets of <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Loc}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">c</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>.
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Pat}_t(h)]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula> represents the genome locations replicated into the gamete <inline-formula><alternatives>
+  <tex-math><![CDATA[h]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>h</mml:mi></mml:math></alternatives></inline-formula>
+  from the <bold>Pat</bold>ernal haploid genome of the parent <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Par}_t(h)]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>
+  (inherited from the father of the parent producing the gamete).</p>
+  <p>For convenience we defin:
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\begin{aligned}
+  \mathrm{Par}(h) & := \mathrm{Par}_t(h)  \\
+  \mathrm{Pat}(h) & := \mathrm{Pat}_t(h)
+  \end{aligned}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mtable><mml:mtr><mml:mtd columnalign="right" style="text-align: right"><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mo>:=</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mtd></mml:mtr><mml:mtr><mml:mtd columnalign="right" style="text-align: right"><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mo>:=</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mi>t</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mtd></mml:mtr></mml:mtable></mml:math></alternatives></disp-formula>
+  where <inline-formula><alternatives>
+  <tex-math><![CDATA[t = \mathrm{Fert}_H(h)]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>t</mml:mi><mml:mo>=</mml:mo><mml:msub><mml:mrow><mml:mi mathvariant="normal">F</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">r</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mi>H</mml:mi></mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>.</p>
+</sec>
+<sec id="haploid-lineages">
+  <title>Haploid lineages</title>
+  <p>A haploid lineage process induces a random function <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Lin}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">n</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> which maps a genomic location
+  in a descendant haploid genome to a haploid lineage.
+  A haploid lineage consists of all the haploids transmitting genetic information via a
+  genomic location to a descendant haploid.
+  For every genomic location <inline-formula><alternatives>
+  <tex-math><![CDATA[\ell \in \mathrm{Loc}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo>ℓ</mml:mo><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">c</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula> and haploid <inline-formula><alternatives>
+  <tex-math><![CDATA[h \in \mathrm{Hap}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>h</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>, its haploid
+  lineage is
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Lin}(\ell, h) := \bigcup_{i} \{ a_i \}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">n</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>,</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>:=</mml:mo><mml:munder><mml:mo>⋃</mml:mo><mml:mi>i</mml:mi></mml:munder><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:msub><mml:mi>a</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo stretchy="false" form="postfix">}</mml:mo></mml:mrow></mml:math></alternatives></disp-formula>
+  where <inline-formula><alternatives>
+  <tex-math><![CDATA[a_i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>a</mml:mi><mml:mi>i</mml:mi></mml:msub></mml:math></alternatives></inline-formula> is defined inductively as follows:
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[a_0 := h]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>a</mml:mi><mml:mn>0</mml:mn></mml:msub><mml:mo>:=</mml:mo><mml:mi>h</mml:mi></mml:mrow></mml:math></alternatives></disp-formula>
+  and for integers <inline-formula><alternatives>
+  <tex-math><![CDATA[i > 0]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>i</mml:mi><mml:mo>&gt;</mml:mo><mml:mn>0</mml:mn></mml:mrow></mml:math></alternatives></inline-formula>,
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[a_{i+1} :=
+    \begin{cases}
+      \big( \mathrm{Par}(a_i) , ⟦ \ell \in \mathrm{Pat}(a_i) ⟧ \big) & \text{if } a_i \in \operatorname{dom}\mathrm{Par}\\
+      a_i & \text{otherwise.}
+    \end{cases}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>a</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mo>+</mml:mo><mml:mn>1</mml:mn></mml:mrow></mml:msub><mml:mo>:=</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">{</mml:mo><mml:mtable><mml:mtr><mml:mtd columnalign="left" style="text-align: left"><mml:mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mml:mo><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>a</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>,</mml:mo><mml:mo stretchy="false" form="prefix">⟦</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>a</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="false" form="postfix">⟧</mml:mo><mml:mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mml:mo></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mrow><mml:mtext mathvariant="normal">if </mml:mtext><mml:mspace width="0.333em"></mml:mspace></mml:mrow><mml:msub><mml:mi>a</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo>∈</mml:mo><mml:mo>dom</mml:mo><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow></mml:mtd></mml:mtr><mml:mtr><mml:mtd columnalign="left" style="text-align: left"><mml:msub><mml:mi>a</mml:mi><mml:mi>i</mml:mi></mml:msub></mml:mtd><mml:mtd columnalign="left" style="text-align: left"><mml:mtext mathvariant="normal">otherwise.</mml:mtext></mml:mtd></mml:mtr></mml:mtable></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+</sec>
+<sec id="an-embedded-ancestral-recombination-graph">
+  <title>An embedded Ancestral Recombination Graph</title>
+  <p>An ancestral recombination graph<sup><xref alt="1" rid="ref-friedman_ancestral_1997" ref-type="bibr">1</xref></sup>
+  <sup><xref alt="2" rid="ref-hein_gene_2005" ref-type="bibr">2</xref></sup><sup><xref alt="3" rid="ref-wakeley_coalescent_2009" ref-type="bibr">3</xref></sup> of a sampled
+  population is embedded in any outcome of any haploid lineage process.
+  We formaly show the
+  exact embedding using the gARG formalism<sup><xref alt="4" rid="ref-wong_what_arg_2022" ref-type="bibr">4</xref></sup>.</p>
+  <p>We start by defining the <italic>genetic legacy</italic> of an ancestral haploid
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[h \in \mathrm{Hap}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>h</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula> for sample population <inline-formula><alternatives>
+  <tex-math><![CDATA[S \subseteq \mathrm{Hap}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>S</mml:mi><mml:mo>⊆</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula> to be
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Leg}(h, S) := \{ (\ell, d) \in \mathrm{Loc}\times S : h \in \mathrm{Lin}(\ell, d) \}
+  \text{ .}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">g</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo>,</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>:=</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>,</mml:mo><mml:mi>d</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">c</mml:mi></mml:mrow><mml:mo>×</mml:mo><mml:mi>S</mml:mi><mml:mo>:</mml:mo><mml:mi>h</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">n</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>,</mml:mo><mml:mi>d</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="false" form="postfix">}</mml:mo><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+  <p>This genetic legacy is the genetic material that survives in the
+  sample population <inline-formula><alternatives>
+  <tex-math><![CDATA[S]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>S</mml:mi></mml:math></alternatives></inline-formula> originally copied from ancestral haploid <inline-formula><alternatives>
+  <tex-math><![CDATA[h]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>h</mml:mi></mml:math></alternatives></inline-formula>
+  (with or without mutations).</p>
+  <p>Genetic legacy for a sample population <inline-formula><alternatives>
+  <tex-math><![CDATA[S]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>S</mml:mi></mml:math></alternatives></inline-formula> induces the following
+  equivalence relationship over pairs of haploids <inline-formula><alternatives>
+  <tex-math><![CDATA[h_1]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>h</mml:mi><mml:mn>1</mml:mn></mml:msub></mml:math></alternatives></inline-formula> and <inline-formula><alternatives>
+  <tex-math><![CDATA[h_2]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>h</mml:mi><mml:mn>2</mml:mn></mml:msub></mml:math></alternatives></inline-formula> in
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Hap}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>:
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[h_1 \simeq_S h_2 \ := \ \mathrm{Leg}(h_1, S) = \mathrm{Leg}(h_2, S)
+  \text{ .}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>h</mml:mi><mml:mn>1</mml:mn></mml:msub><mml:msub><mml:mo>≃</mml:mo><mml:mi>S</mml:mi></mml:msub><mml:msub><mml:mi>h</mml:mi><mml:mn>2</mml:mn></mml:msub><mml:mspace width="0.222em"></mml:mspace><mml:mo>:=</mml:mo><mml:mspace width="0.222em"></mml:mspace><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">g</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>h</mml:mi><mml:mn>1</mml:mn></mml:msub><mml:mo>,</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">g</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>h</mml:mi><mml:mn>2</mml:mn></mml:msub><mml:mo>,</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula>
+  We denote the resulting equivalence class containing <inline-formula><alternatives>
+  <tex-math><![CDATA[h \in \mathrm{Hap}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>h</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula> as
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[{[h]}_S \ := \ \{ h' : \mathrm{Leg}(h', S) = \mathrm{Leg}(h, S) \}
+  \text{ .}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">[</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">]</mml:mo></mml:mrow><mml:mi>S</mml:mi></mml:msub><mml:mspace width="0.222em"></mml:mspace><mml:mo>:=</mml:mo><mml:mspace width="0.222em"></mml:mspace><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mi>h</mml:mi><mml:mi>′</mml:mi><mml:mo>:</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">g</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mi>′</mml:mi><mml:mo>,</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">g</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo>,</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="false" form="postfix">}</mml:mo><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+  <p>In this equivalence relationship, haploids are considered equivalent if
+  they have the same genetic legacy for the sample population <inline-formula><alternatives>
+  <tex-math><![CDATA[S]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>S</mml:mi></mml:math></alternatives></inline-formula>.</p>
+  <p>A convenient choice for an embedded gARG<sup><xref alt="4" rid="ref-wong_what_arg_2022" ref-type="bibr">4</xref></sup> is
+  to set the gARG nodes (vertices) to be the equivalence classes:
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\mathrm{Nodes}(S) := \{ {[h]}_S : h \in \mathrm{Hap}\}
+  \text{ .}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mi mathvariant="normal">N</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">d</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">s</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>:=</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:msub><mml:mrow><mml:mo stretchy="true" form="prefix">[</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">]</mml:mo></mml:mrow><mml:mi>S</mml:mi></mml:msub><mml:mo>:</mml:mo><mml:mi>h</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi></mml:mrow><mml:mo stretchy="false" form="postfix">}</mml:mo><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+  <p>The (unannotated) graph edges of the gARG are chosen as child-parent
+  node pairs <inline-formula><alternatives>
+  <tex-math><![CDATA[(C, P) \in \mathrm{Nodes}(S)^2]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>C</mml:mi><mml:mo>,</mml:mo><mml:mi>P</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">N</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">d</mml:mi><mml:mi mathvariant="normal">e</mml:mi><mml:mi mathvariant="normal">s</mml:mi></mml:mrow><mml:msup><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>S</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mn>2</mml:mn></mml:msup></mml:mrow></mml:math></alternatives></inline-formula> where
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[(\mathrm{Par}(h), i) \in P \text{ for some $h \in C$ and some $i \in \{0, 1\}$ .}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mrow><mml:mi mathvariant="normal">P</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">r</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>,</mml:mo><mml:mi>i</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>∈</mml:mo><mml:mi>P</mml:mi><mml:mrow><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> for some </mml:mtext><mml:mspace width="0.333em"></mml:mspace></mml:mrow><mml:mrow><mml:mi>h</mml:mi><mml:mo>∈</mml:mo><mml:mi>C</mml:mi></mml:mrow><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> and some </mml:mtext><mml:mspace width="0.333em"></mml:mspace></mml:mrow><mml:mrow><mml:mi>i</mml:mi><mml:mo>∈</mml:mo><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mn>1</mml:mn><mml:mo stretchy="false" form="postfix">}</mml:mo></mml:mrow><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+  <p>In the gARG, anotations are added for each graph edge (pair of child
+  and parent nodes). This annotation is the set of locations through which
+  genetic information has been copied from parent to child. In the
+  following interpretation, the only locations of interest are those for
+  which genetic information has been transmitted into the sample
+  population <inline-formula><alternatives>
+  <tex-math><![CDATA[S]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>S</mml:mi></mml:math></alternatives></inline-formula>. With this interpretation, the annotation for edge
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[(C,P)]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>C</mml:mi><mml:mo>,</mml:mo><mml:mi>P</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:math></alternatives></inline-formula> is
+  <disp-formula><alternatives>
+  <tex-math><![CDATA[\{ \ell \in \mathrm{Loc}:
+       C \subseteq \mathrm{Lin}(\ell, h) \text{ and } P \subseteq \mathrm{Lin}(\ell, h) \text{ for some $h \in S$}
+    \}
+  \text{ .}]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="false" form="prefix">{</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">c</mml:mi></mml:mrow><mml:mo>:</mml:mo><mml:mi>C</mml:mi><mml:mo>⊆</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">n</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>,</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> and </mml:mtext><mml:mspace width="0.333em"></mml:mspace></mml:mrow><mml:mi>P</mml:mi><mml:mo>⊆</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">n</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>,</mml:mo><mml:mi>h</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mrow><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> for some </mml:mtext><mml:mspace width="0.333em"></mml:mspace></mml:mrow><mml:mrow><mml:mi>h</mml:mi><mml:mo>∈</mml:mo><mml:mi>S</mml:mi></mml:mrow></mml:mrow><mml:mo stretchy="false" form="postfix">}</mml:mo><mml:mrow><mml:mspace width="0.333em"></mml:mspace><mml:mtext mathvariant="normal"> .</mml:mtext></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+</sec>
+<sec id="acknowledgements">
+  <title>Acknowledgements</title>
+  <p>Thanks to Daria Shipilina and Nick Barton for sharing their preprint<sup><xref alt="5" rid="ref-shipilina_origin_2022" ref-type="bibr">5</xref></sup> and discussing the conjecture in edition
+  0.1 of this document relating to their preprint.</p>
+</sec>
+<sec id="changes-from-edition-0.1">
+  <title>Changes from edition 0.1</title>
+  <list list-type="bullet">
+    <list-item>
+      <p>add section about embedded ARG</p>
+    </list-item>
+    <list-item>
+      <p>removed conjecture relating to<sup><xref alt="5" rid="ref-shipilina_origin_2022" ref-type="bibr">5</xref></sup></p>
+    </list-item>
+  </list>
+</sec>
+  </body>
+  <back>
+<ref-list>
+  <title>References</title>
+  <ref id="ref-shipilina_origin_2022">
+    <element-citation publication-type="report">
+      <person-group person-group-type="author">
+        <name><surname>Shipilina</surname><given-names>Daria</given-names></name>
+        <name><surname>Stankowski</surname><given-names>Sean</given-names></name>
+        <name><surname>Pal</surname><given-names>Arka</given-names></name>
+        <name><surname>Chan</surname><given-names>Yingguang Frank</given-names></name>
+        <name><surname>Barton</surname><given-names>Nick</given-names></name>
+      </person-group>
+      <article-title>On the origin and structure of haplotype blocks</article-title>
+      <publisher-name>Preprints</publisher-name>
+      <year iso-8601-date="2022-02">2022</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-07">2022</year><month>05</month><day>07</day></date-in-citation>
+      <uri>https://www.authorea.com/users/459348/articles/555633-on-the-origin-and-structure-of-haplotype-blocks?commit=ea3b976c235b53636c5db8582945f9e7de8be30c</uri>
+      <pub-id pub-id-type="doi">10.22541/au.164425910.09070763/v1</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-friedman_ancestral_1997">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Griffiths</surname><given-names>Robert C.</given-names></name>
+        <name><surname>Marjoram</surname><given-names>Paul</given-names></name>
+      </person-group>
+      <article-title>An Ancestral Recombination Graph</article-title>
+      <source>Progress in Population Genetics and Human Evolution</source>
+      <person-group person-group-type="editor">
+        <name><surname>Friedman</surname><given-names>Avner</given-names></name>
+        <name><surname>Miller</surname><given-names>Willard</given-names></name>
+        <name><surname>Donnelly</surname><given-names>Peter</given-names></name>
+        <name><surname>Tavaré</surname><given-names>Simon</given-names></name>
+      </person-group>
+      <publisher-name>Springer New York</publisher-name>
+      <publisher-loc>New York, NY</publisher-loc>
+      <year iso-8601-date="1997">1997</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-08">2022</year><month>07</month><day>08</day></date-in-citation>
+      <volume>87</volume>
+      <isbn>978-1-4419-2856-6</isbn>
+      <fpage>257</fpage>
+      <lpage>270</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-hein_gene_2005">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Hein</surname><given-names>Jotun</given-names></name>
+        <name><surname>Schierup</surname><given-names>Mikkel H.</given-names></name>
+        <name><surname>Wiuf</surname><given-names>Carsten</given-names></name>
+      </person-group>
+      <source>Gene genealogies, variation and evolution: A primer in coalescent theory</source>
+      <publisher-name>Oxford University Press</publisher-name>
+      <publisher-loc>Oxford ; New York</publisher-loc>
+      <year iso-8601-date="2005">2005</year>
+      <isbn>978-0-19-852996-5</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-wakeley_coalescent_2009">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Wakeley</surname><given-names>John</given-names></name>
+      </person-group>
+      <source>Coalescent theory: An introduction</source>
+      <publisher-name>Roberts &amp; Co. Publishers</publisher-name>
+      <publisher-loc>Greenwood Village, Colo</publisher-loc>
+      <year iso-8601-date="2009">2009</year>
+      <isbn>978-0-9747077-5-4</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-wong_what_arg_2022">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Wong</surname><given-names>Yan</given-names></name>
+        <name><surname>Ignatieva</surname><given-names>Anastasia</given-names></name>
+        <name><surname>Koskela</surname><given-names>Jere</given-names></name>
+        <name><surname>Gorjanc</surname><given-names>Gregor</given-names></name>
+        <name><surname>Wohns</surname><given-names>Anthony W.</given-names></name>
+        <name><surname>Kelleher</surname><given-names>Jerome</given-names></name>
+      </person-group>
+      <source>A general and efficient representation of ancestral recombination graphs</source>
+      <publisher-loc>https://archive.softwareheritage.org/swh:1:rev:7df4f1995028cc676a6c1b231e8d7a024666b5fc</publisher-loc>
+      <year iso-8601-date="2022">2022</year>
+    </element-citation>
+  </ref>
+</ref-list>
+  </back>
+</article>
