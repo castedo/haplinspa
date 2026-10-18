@@ -1,12 +1,18 @@
 \addbibresource{references.bib}
 
+\title{Recombinant Haploid Tree Process}
+\author{E. Castedo Ellerman}
+
 \begin{document}
+\maketitle
 
 
 \newcommand{\mathstop}{\text{ .}}
 \renewcommand{\Pr}{\operatorname{\mathbb{P}}}
 \newcommand{\dom}{\operatorname{dom}}
+\newcommand{\At}{\mathrm{At}}
 \newcommand{\Tim}{\mathrm{Tim}}
+\newcommand{\Time}{\mathrm{Time}}
 \newcommand{\Hap}{\mathrm{Hap}}
 \newcommand{\Dip}{\mathrm{Dip}}
 \newcommand{\Par}{\mathrm{Par}}
@@ -14,6 +20,9 @@
 \newcommand{\Fert}{\mathrm{Fert}}
 \newcommand{\Loc}{\mathrm{Loc}}
 \newcommand{\Lin}{\mathrm{Lin}}
+\newcommand{\Haplin}{\mathrm{Haplin}}
+\newcommand{\Tree}{\mathrm{Tree}}
+\newcommand{\Tip}{\mathrm{Tip}}
 \newcommand{\Leg}{\mathrm{Leg}}
 \newcommand{\Nodes}{\mathrm{Nodes}}
 
@@ -26,14 +35,73 @@
 \textbf{OBJECTIVES:}
 
 \begin{itemize}
+\item Gather feedback on terminology and connections to existing research.
+\item A mathematical definition that is precisely a stochastic process
+  with close correspondence to key physical phenomena in population genetics.
 \item
-  Formal mathematical definition of stochastic process used by
-  statistical estimator of admixture timing under development.
-\item
-  Precise mathematical definitions for technical discussions relating to
-  ancestral recombination graphs.
+  Mathematical definitions for technical discussions relating to
+  ancestral recombination graphs and Markov genealogy processes.
 \end{itemize}
 \end{abstract}
+
+
+\section{Definition}
+
+A \emph{haploid tree process} is a \emph{stochastic process},
+which has an underlying probability space $(\Omega, \mathcal{F}, P)$,
+along with the following underlying fixed givens:
+
+\begin{enumerate}
+\item a set of \emph{potential haploids}, denoted $\Hap$,
+\item a \emph{time function}, denoted $\At$, mapping $\Hap$ to $\Re$,
+\item a set of chromosomal loci, denoted $\Loc$, and
+\item a set of real times $\Time \subset \Re$.
+\end{enumerate}
+
+Depending on the application, potential haploids might be interpreted as potential organisms, gametes, or spores.
+
+A set $L \subset \Hap$ is a \emph{haploid lineage} iff it is, with the ordering induced by $\At$,
+\begin{enumerate}
+\item totally (linearly) ordered,
+\item strictly ordered, and
+\item has a maximum (newest) haploid, named "the tip".
+\end{enumerate}
+
+The set of all such \emph{haploid lineages} is denoted $\Haplin$.
+The maximum (newest) haploid in a haploid lineage $L$ is denoted $\Tip(L)$
+
+For any haploid lineage $L \in \Haplin$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
+$$
+\forall x \in L, y \in S: \At(x) < \At(y) \implies x \in S
+\mathstop
+$$
+
+A set of haploid lineages $T \subset \Haplin$ is a \emph{haploid tree} iff for every member lineage $L \in T$, every sublineage of $L$ is also a member of $T$.
+
+The \emph{union} of a haploid tree $T$ is the union of all its member lineages is denoted
+$\bigcup T$.
+
+A \emph{recombinant haploid tree process} is a family of haploid tree valued random variables,
+index by time (with subscript) and locus (with superscript),
+$$
+\{ \Tree^\ell_t : t \in \Re, \ell \in \Loc \}
+$$
+such that
+\begin{enumerate}
+\item $\forall t \in \Time \left( \left| \{ \bigcup \Tree^\ell_t : \ell \in \Loc \} \right| = 1 \right)$
+      and thus $\bigcup \Tree_t$ is an unambiguous set of haploids,
+\item $\forall t \in \Time, h \in \bigcup \Tree_t \left( \At(h) \le t \right)$, and
+\item for every $\ell \in \Loc$, $\{ \Tree^\ell_t : t \in \Re \}$ has a total increasing ordering
+under set inclusion order.
+\end{enumerate}
+
+As a stochastic process, a recombinant tree process is a time-indexed random variable taking values in the
+range of functions from loci $\Loc$ to haploid trees.
+
+Let $\bigcup \Tree$ denote $\bigcup_{t \in \Time} \bigcup \Tree_t$.
+
+For all $h \in \bigcup \Tree$,
+$\Lin(\ell, h)$ equals the $L \in \Tree^\ell_{\At(h)}$ such that $\Tip(L) = h$.
 
 
 \section{Notation}
@@ -42,7 +110,7 @@
 \item
   "$\dom f$" denotes the domain of function $f$
 \item
-  "$⟦ x \in S ⟧$" is Iverson bracket notation for the indicator function of $S$, namely
+  "$⟦ x \in S ⟧$" is the Iverson bracket notation for the indicator function of $S$, namely
 $$
 ⟦ x \in S ⟧ =
   \begin{cases}

@@ -1,12 +1,13 @@
-% This file is used to provide a draft preview via classic LaTeX software like TeX Live
+% This file is used to provide a draft preview via lualaTeX
 
 \documentclass{article}
 \usepackage{amsmath, amssymb}
 \usepackage{hyperref}
+\renewcommand{\familydefault}{\sfdefault}
 \usepackage{parskip}
 
 \usepackage{stmaryrd}
-\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
 \usepackage{newunicodechar}
 \newunicodechar{⟦}{\llbracket}
 \newunicodechar{⟧}{\rrbracket}

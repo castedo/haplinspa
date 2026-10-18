@@ -5,15 +5,15 @@ input-file: ${.}/doc.tex
 resource-path:
 - ${.}
 metadata:
-  title: "Haploid lineage process"
-  date: 2023-04-24
+  title: "Recombinant Haploid tree process"
+  date: 2026-10-18
   author:
   - surname: Ellerman
     given-names: E. Castedo
     email: castedo@castedo.com
     orcid: https://orcid.org/0000-0002-5014-4809
   copyright:
-    statement: "© 2023, Ellerman et al"
+    statement: "© 2026, Ellerman et al"
   license:
     link: "https://creativecommons.org/licenses/by/4.0/"
     text: >-
