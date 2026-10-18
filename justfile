@@ -1,3 +1,7 @@
+latex:
+  mkdir -p _preview
+  lualatex --output-directory=_preview main.tex
+
 baseprint:
   xargs --arg-file baseprinter-xargs.txt baseprinter
 
