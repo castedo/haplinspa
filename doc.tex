@@ -1,6 +1,6 @@
 \addbibresource{references.bib}
 
-\title{Recombinant Haploid Tree Process}
+\title{Recombinant haploid Tree Process}
 \author{E. Castedo Ellerman}
 
 \begin{document}
@@ -8,21 +8,15 @@
 
 
 \newcommand{\mathstop}{\text{ .}}
-\renewcommand{\Pr}{\operatorname{\mathbb{P}}}
-\newcommand{\dom}{\operatorname{dom}}
 \newcommand{\At}{\mathrm{At}}
-\newcommand{\Tim}{\mathrm{Tim}}
 \newcommand{\Time}{\mathrm{Time}}
 \newcommand{\Hap}{\mathrm{Hap}}
-\newcommand{\Dip}{\mathrm{Dip}}
-\newcommand{\Par}{\mathrm{Par}}
-\newcommand{\Pat}{\mathrm{Pat}}
-\newcommand{\Fert}{\mathrm{Fert}}
 \newcommand{\Loc}{\mathrm{Loc}}
 \newcommand{\Lin}{\mathrm{Lin}}
 \newcommand{\Haplin}{\mathrm{Haplin}}
 \newcommand{\Tree}{\mathrm{Tree}}
 \newcommand{\Tip}{\mathrm{Tip}}
+\newcommand{\Pred}{\mathrm{Pred}}
 \newcommand{\Leg}{\mathrm{Leg}}
 \newcommand{\Nodes}{\mathrm{Nodes}}
 
@@ -36,8 +30,9 @@
 
 \begin{itemize}
 \item Gather feedback on terminology and connections to existing research.
-\item A mathematical definition that is precisely a stochastic process
-  with close correspondence to key physical phenomena in population genetics.
+\item A mathematical definition that is precisely a stochastic process with close
+  correspondence to the transmission of genetic information through haploid cells in a
+  population.
 \item
   Mathematical definitions for technical discussions relating to
   ancestral recombination graphs and Markov genealogy processes.
@@ -60,21 +55,33 @@ along with the following underlying fixed givens:
 
 Depending on the application, potential haploids might be interpreted as potential organisms, gametes, or spores.
 
-A set $L \subset \Hap$ is a \emph{haploid lineage} iff it is, with the ordering induced by $\At$,
+\subsection{Haploid lineages}
+
+A \emph{haploid lineage} represents all the haploids transmitting genetic information at a
+genomic locus to a descendant haploid.
+
+Formally, a \emph{haploid lineage} is a set of haploids, $L \subset \Hap$, such that,
+with the ordering induced by $\At$, $L$ is
 \begin{enumerate}
 \item totally (linearly) ordered,
 \item strictly ordered, and
-\item has a maximum (newest) haploid, named "the tip".
+\item every subset of $L$ has a maximum (newest) haploid.
 \end{enumerate}
 
 The set of all such \emph{haploid lineages} is denoted $\Haplin$.
-The maximum (newest) haploid in a haploid lineage $L$ is denoted $\Tip(L)$
+
+The maximum (newest) haploid in a haploid lineage $L$ is denoted $\Tip(L)$.
+Let $\Pred(\ell, h)$ denote $\Tip(\Lin(\ell, h) / \{h\})$, that is, the predecessor
+haploid of $h$ from which genetic information was copied at locus $\ell$.
 
 For any haploid lineage $L \in \Haplin$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
 $$
 \forall x \in L, y \in S: \At(x) < \At(y) \implies x \in S
 \mathstop
 $$
+
+
+\subsection{Haploid tree process}
 
 A set of haploid lineages $T \subset \Haplin$ is a \emph{haploid tree} iff for every member lineage $L \in T$, every sublineage of $L$ is also a member of $T$.
 
@@ -102,127 +109,6 @@ Let $\bigcup \Tree$ denote $\bigcup_{t \in \Time} \bigcup \Tree_t$.
 
 For all $h \in \bigcup \Tree$,
 $\Lin(\ell, h)$ equals the $L \in \Tree^\ell_{\At(h)}$ such that $\Tip(L) = h$.
-
-
-\section{Notation}
-
-\begin{itemize}
-\item
-  "$\dom f$" denotes the domain of function $f$
-\item
-  "$⟦ x \in S ⟧$" is the Iverson bracket notation for the indicator function of $S$, namely
-$$
-⟦ x \in S ⟧ =
-  \begin{cases}
-    1 & \text{if } x \in S  \\
-    0 & \text{otherwise.}
-  \end{cases}
-$$
-
-\end{itemize}
-
-
-\section{Fertlization Function}
-
-A \emph{haploid lineage process} is formally defined in terms of a given
-fixed \emph{fertilization function}, which we denote with the symbol $\Fert$. This
-function maps possible occurrences of fertilization to points in time.
-
-From a given fertilization function $\Fert$, we define three convenient symbols:
-\begin{itemize}
-\item
-  $\Tim$: the range of $\Fert$ (a set of real numbers representing points in time),
-\item
-  $\Dip$: the domain of $\Fert$ (a set of possible diploid organisms), and
-\item
-  $\Hap$: the set $\Dip \times \{0, 1 \}$ representing fertilizing gametes.
-\end{itemize}
-
-For a diploid $d \in \Dip$, the members $(d, 0)$ and $(d, 1)$ of $\Hap$ index the
-fertilizing egg and sperm gametes, respectively.
-
-For convenience, we map $\Hap$ to fertilization times with:
-$$
-  \Fert_H((d, s)) := \Fert(d)
-$$
-for all $d \in \Dip$ and $s \in \{0, 1\}$.
-
-We denote the following inverse images as:
-$$
-\begin{aligned}
-\Dip_t & := \{ d \in \Dip : \Fert(d) = t \}  \\
-\Hap_t & := \{ d \in \Hap : \Fert_H(d) = t \}  \\
-\Dip_{<t} & := \{ d \in \Dip : \Fert(d) < t \}
-\mathstop
-\end{aligned}
-$$
-
-A technical requirement on any given $\Fert$ in this document is that $\Dip_t$ must be
-countable for every $t \in \Tim$.
-
-An example of a valid fertilization function is $\Fert : \mathbf{N}^2 \mapsto \mathbf{N}$
-where $\Fert( (t, n) ) = t$.
-
-
-\section{Haploid lineage process}
-
-Given 
-\begin{itemize}
-\item
-  a fertilization function $\Fert$,
-\item
-  a set $\Loc$ of genomic locations,
-\item
-  and probability space $(\Omega, \mathcal{F}, \Pr)$,
-\end{itemize}
-a \emph{Haploid lineage process} is a stochastic process defined by a time-indexed
-family of two random variables
-$$
- \left\{ (\Par_t, \Pat_t) \right\}_{t \in \Tim}
-\mathstop
-$$
-
-Each $\Par_t$ is a random function from a subset of $\Hap_t$ to $\Dip_{<t}$.
-$\Par_t(h)$ represents the diploid \textbf{Par}ent that produced the haploid gamete $h$.
-
-Each $\Pat_t$ is a random function from the domain of $\Par_t$ to subsets of $\Loc$.
-$\Pat_t(h)$ represents the genome locations replicated into the gamete $h$
-from the \textbf{Pat}ernal haploid genome of the parent $\Par_t(h)$
-(inherited from the father of the parent producing the gamete).
-
-For convenience we defin:
-$$
-\begin{aligned}
-\Par(h) & := \Par_t(h)  \\
-\Pat(h) & := \Pat_t(h)
-\end{aligned}
-$$
-where $t = \Fert_H(h)$.
-
-
-\section{Haploid lineages}
-
-A haploid lineage process induces a random function $\Lin$ which maps a genomic location
-in a descendant haploid genome to a haploid lineage.
-A haploid lineage consists of all the haploids transmitting genetic information via a
-genomic location to a descendant haploid.
-For every genomic location $\ell \in \Loc$ and haploid $h \in \Hap$, its haploid
-lineage is
-$$
-\Lin(\ell, h) := \bigcup_{i} \{ a_i \}
-$$
-where $a_i$ is defined inductively as follows:
-$$
-a_0 := h
-$$
-and for integers $i > 0$,
-$$
-a_{i+1} :=
-  \begin{cases}
-    \big( \Par(a_i) , ⟦ \ell \in \Pat(a_i) ⟧ \big) & \text{if } a_i \in \dom \Par  \\
-    a_i & \text{otherwise.}
-  \end{cases}
-$$
 
 
 \section{An embedded Ancestral Recombination Graph}
@@ -270,7 +156,7 @@ $$
 The (unannotated) graph edges of the gARG are chosen as child-parent
 node pairs $(C, P) \in \Nodes(S)^2$ where
 $$
-  (\Par(h), i) \in P \text{ for some $h \in C$ and some $i \in \{0, 1\}$ .}
+  \Pred(\ell, h) \in P \text{ for some $h \in C$ and some $\ell \in \Loc$ .}
 $$
 
 In the gARG, anotations are added for each graph edge (pair of child
@@ -290,18 +176,9 @@ $$
 \section{Acknowledgements}
 
 Thanks to Daria Shipilina and Nick Barton for sharing their preprint
-\cite{shipilina_origin_2022} and discussing the conjecture in edition
-0.1 of this document relating to their preprint.
+\cite{shipilina_origin_2022} and discussing a conjecture in a very early draft of this
+document relating to their preprint.
 
-\section{Changes from edition 0.1}
+\printbibliography
 
-\begin{itemize}
-\item
-  add section about embedded ARG
-\item
-  removed conjecture relating to \cite{shipilina_origin_2022}
-\end{itemize}
-
-
-\printbibliography % used by LaTeX but not pandoc
 \end{document}
