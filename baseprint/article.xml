@@ -205,7 +205,7 @@
   <sup><xref alt="2" rid="ref-hein_gene_2005" ref-type="bibr">2</xref></sup><sup><xref alt="3" rid="ref-wakeley_coalescent_2009" ref-type="bibr">3</xref></sup> of a sampled
   population is embedded in any outcome of any haploid lineage process.
   We formaly show the
-  exact embedding using the gARG formalism<sup><xref alt="4" rid="ref-wong_what_arg_2022" ref-type="bibr">4</xref></sup>.</p>
+  exact embedding using the gARG formalism<sup><xref alt="4" rid="ref-wong_general_2024" ref-type="bibr">4</xref></sup>.</p>
   <p>We start by defining the <italic>genetic legacy</italic> of an ancestral haploid
   <inline-formula><alternatives>
   <tex-math><![CDATA[h \in \mathrm{Hap}]]></tex-math>
@@ -249,7 +249,7 @@
   they have the same genetic legacy for the sample population <inline-formula><alternatives>
   <tex-math><![CDATA[S]]></tex-math>
   <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>S</mml:mi></mml:math></alternatives></inline-formula>.</p>
-  <p>A convenient choice for an embedded gARG<sup><xref alt="4" rid="ref-wong_what_arg_2022" ref-type="bibr">4</xref></sup> is
+  <p>A convenient choice for an embedded gARG<sup><xref alt="4" rid="ref-wong_general_2024" ref-type="bibr">4</xref></sup> is
   to set the gARG nodes (vertices) to be the equivalence classes:
   <disp-formula><alternatives>
   <tex-math><![CDATA[\mathrm{Nodes}(S) := \{ {[h]}_S : h \in \mathrm{Hap}\}
@@ -282,28 +282,31 @@
 </sec>
 <sec id="acknowledgements">
   <title>Acknowledgements</title>
-  <p>Thanks to Daria Shipilina and Nick Barton for sharing their preprint<sup><xref alt="5" rid="ref-shipilina_origin_2022" ref-type="bibr">5</xref></sup> and discussing a conjecture in a very early draft of this
-  document relating to their preprint.</p>
+  <p>Thanks to Daria Shipilina and Nick Barton for sharing a preprint<sup><xref alt="5" rid="ref-shipilina_origin_2023" ref-type="bibr">5</xref></sup> that motivated a conjecture in an early draft of this
+  document.</p>
 </sec>
   </body>
   <back>
 <ref-list>
   <title>References</title>
-  <ref id="ref-shipilina_origin_2022">
-    <element-citation publication-type="report">
+  <ref id="ref-shipilina_origin_2023">
+    <element-citation publication-type="article-journal">
       <person-group person-group-type="author">
         <name><surname>Shipilina</surname><given-names>Daria</given-names></name>
-        <name><surname>Stankowski</surname><given-names>Sean</given-names></name>
         <name><surname>Pal</surname><given-names>Arka</given-names></name>
+        <name><surname>Stankowski</surname><given-names>Sean</given-names></name>
         <name><surname>Chan</surname><given-names>Yingguang Frank</given-names></name>
-        <name><surname>Barton</surname><given-names>Nick</given-names></name>
+        <name><surname>Barton</surname><given-names>Nicholas H.</given-names></name>
       </person-group>
       <article-title>On the origin and structure of haplotype blocks</article-title>
-      <publisher-name>Preprints</publisher-name>
-      <year iso-8601-date="2022-02">2022</year><month>02</month>
-      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-07">2022</year><month>05</month><day>07</day></date-in-citation>
-      <uri>https://www.authorea.com/users/459348/articles/555633-on-the-origin-and-structure-of-haplotype-blocks?commit=ea3b976c235b53636c5db8582945f9e7de8be30c</uri>
-      <pub-id pub-id-type="doi">10.22541/au.164425910.09070763/v1</pub-id>
+      <source>Molecular ecology</source>
+      <year iso-8601-date="2023-03">2023</year><month>03</month>
+      <volume>32</volume>
+      <issue>6</issue>
+      <issn>1365-294X 0962-1083</issn>
+      <pub-id pub-id-type="doi">10.1111/mec.16793</pub-id>
+      <fpage>1441</fpage>
+      <lpage>1457</lpage>
     </element-citation>
   </ref>
   <ref id="ref-friedman_ancestral_1997">
@@ -356,19 +359,30 @@
       <isbn>978-0-9747077-5-4</isbn>
     </element-citation>
   </ref>
-  <ref id="ref-wong_what_arg_2022">
-    <element-citation publication-type="book">
+  <ref id="ref-wong_general_2024">
+    <element-citation publication-type="article-journal">
       <person-group person-group-type="author">
         <name><surname>Wong</surname><given-names>Yan</given-names></name>
         <name><surname>Ignatieva</surname><given-names>Anastasia</given-names></name>
         <name><surname>Koskela</surname><given-names>Jere</given-names></name>
         <name><surname>Gorjanc</surname><given-names>Gregor</given-names></name>
-        <name><surname>Wohns</surname><given-names>Anthony W.</given-names></name>
+        <name><surname>Wohns</surname><given-names>Anthony W</given-names></name>
         <name><surname>Kelleher</surname><given-names>Jerome</given-names></name>
       </person-group>
-      <source>A general and efficient representation of ancestral recombination graphs</source>
-      <publisher-loc>https://archive.softwareheritage.org/swh:1:rev:7df4f1995028cc676a6c1b231e8d7a024666b5fc</publisher-loc>
-      <year iso-8601-date="2022">2022</year>
+      <article-title>A general and efficient representation of ancestral recombination graphs</article-title>
+      <source>GENETICS</source>
+      <person-group person-group-type="editor">
+        <name><surname>Coop</surname><given-names>G</given-names></name>
+      </person-group>
+      <year iso-8601-date="2024-09-04">2024</year><month>09</month><day>04</day>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2026-10-19">2026</year><month>10</month><day>19</day></date-in-citation>
+      <volume>228</volume>
+      <issue>1</issue>
+      <issn>1943-2631</issn>
+      <uri>https://academic.oup.com/genetics/article/doi/10.1093/genetics/iyae100/7714980</uri>
+      <pub-id pub-id-type="doi">10.1093/genetics/iyae100</pub-id>
+      <fpage>iyae100</fpage>
+      <lpage></lpage>
     </element-citation>
   </ref>
 </ref-list>

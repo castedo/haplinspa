@@ -1,6 +1,13 @@
+#!/usr/bin/env -S just --justfile
+
+default:
+    just --list
+
 latex:
   mkdir -p _preview
-  lualatex --output-directory=_preview main.tex
+  latexmk -pdf -pdflatex="lualatex" \
+    -outdir=_preview -auxdir=_build \
+    main.tex
 
 baseprint:
   xargs --arg-file baseprinter-xargs.txt baseprinter
