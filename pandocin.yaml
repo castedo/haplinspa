@@ -5,7 +5,7 @@ input-file: ${.}/doc.tex
 resource-path:
 - ${.}
 metadata:
-  title: "Recombinant Haploid tree process"
+  title: "Recombinant haploid tree process"
   date: 2026-10-18
   author:
   - surname: Ellerman
