@@ -75,10 +75,10 @@ Let $\Pred(\ell, h)$ denote $\Tip(\Lin(\ell, h) / \{h\})$, that is, the predeces
 haploid of $h$ from which genetic information was copied at locus $\ell$.
 
 For any haploid lineage $L \in \Haplin$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
-$$
+\[
 \forall x \in L, y \in S: \At(x) < \At(y) \implies x \in S
 \mathstop
-$$
+\]
 
 
 \subsection{Haploid tree process}
@@ -90,9 +90,9 @@ $\bigcup T$.
 
 A \emph{recombinant haploid tree process} is a family of haploid tree valued random variables,
 index by time (with subscript) and locus (with superscript),
-$$
+\[
 \{ \Tree^\ell_t : t \in \Re, \ell \in \Loc \}
-$$
+\]
 such that
 \begin{enumerate}
 \item $\forall t \in \Time \left( \left| \{ \bigcup \Tree^\ell_t : \ell \in \Loc \} \right| = 1 \right)$
@@ -117,14 +117,14 @@ An ancestral recombination graph \cite{friedman_ancestral_1997}
 \cite{hein_gene_2005} \cite{wakeley_coalescent_2009} of a sampled
 population is embedded in any outcome of any haploid lineage process.
 We formaly show the
-exact embedding using the gARG formalism \cite{wong_what_arg_2022}.
+exact embedding using the gARG formalism \cite{wong_general_2024}.
 
 We start by defining the \emph{genetic legacy} of an ancestral haploid
 $h \in \Hap$ for sample population $S \subseteq \Hap$ to be
-$$
+\[
   \Leg(h, S) := \{ (\ell, d) \in \Loc \times S : h \in \Lin(\ell, d) \}
 \mathstop
-$$
+\]
 
 This genetic legacy is the genetic material that survives in the
 sample population $S$ originally copied from ancestral haploid $h$
@@ -133,31 +133,31 @@ sample population $S$ originally copied from ancestral haploid $h$
 Genetic legacy for a sample population $S$ induces the following
 equivalence relationship over pairs of haploids $h_1$ and $h_2$ in
 $\Hap$:
-$$
+\[
 h_1 \simeq_S h_2 \ := \ \Leg(h_1, S) = \Leg(h_2, S)
 \mathstop
-$$
+\]
 We denote the resulting equivalence class containing $h \in \Hap$ as
-$$
+\[
 {[h]}_S \ := \ \{ h' : \Leg(h', S) = \Leg(h, S) \}
 \mathstop
-$$
+\]
 
 In this equivalence relationship, haploids are considered equivalent if
 they have the same genetic legacy for the sample population $S$.
 
-A convenient choice for an embedded gARG \cite{wong_what_arg_2022} is
+A convenient choice for an embedded gARG \cite{wong_general_2024} is
 to set the gARG nodes (vertices) to be the equivalence classes:
-$$
+\[
    \Nodes(S) := \{ {[h]}_S : h \in \Hap \}
 \mathstop
-$$
+\]
 
 The (unannotated) graph edges of the gARG are chosen as child-parent
 node pairs $(C, P) \in \Nodes(S)^2$ where
-$$
+\[
   \Pred(\ell, h) \in P \text{ for some $h \in C$ and some $\ell \in \Loc$ .}
-$$
+\]
 
 In the gARG, anotations are added for each graph edge (pair of child
 and parent nodes). This annotation is the set of locations through which
@@ -166,18 +166,18 @@ following interpretation, the only locations of interest are those for
 which genetic information has been transmitted into the sample
 population $S$. With this interpretation, the annotation for edge
 $(C,P)$ is
-$$
+\[
   \{ \ell \in \Loc :
      C \subseteq \Lin(\ell, h) \text{ and } P \subseteq \Lin(\ell, h) \text{ for some $h \in S$}
   \}
 \mathstop
-$$
+\]
 
 \section{Acknowledgements}
 
-Thanks to Daria Shipilina and Nick Barton for sharing their preprint
-\cite{shipilina_origin_2022} and discussing a conjecture in a very early draft of this
-document relating to their preprint.
+Thanks to Daria Shipilina and Nick Barton for sharing a preprint
+\cite{shipilina_origin_2023} that motivated a conjecture in an early draft of this
+document.
 
 \printbibliography
 
