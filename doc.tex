@@ -1,6 +1,6 @@
 \addbibresource{references.bib}
 
-\title{Recombinant haploid Tree Process}
+\title{Recombinant Haploid Tree Process}
 \author{E. Castedo Ellerman}
 
 \begin{document}
@@ -10,14 +10,14 @@
 \newcommand{\mathstop}{\text{ .}}
 \newcommand{\At}{\mathrm{At}}
 \newcommand{\Time}{\mathrm{Time}}
-\newcommand{\Hap}{\mathrm{Hap}}
-\newcommand{\Loc}{\mathrm{Loc}}
+\newcommand{\Hap}{\mathrm{Haps}}
+\newcommand{\Loc}{\mathrm{Loci}}
 \newcommand{\Lin}{\mathrm{Lin}}
-\newcommand{\Haplin}{\mathrm{Haplin}}
+\newcommand{\Haplin}{\mathrm{Haplins}}
 \newcommand{\Tree}{\mathrm{Tree}}
 \newcommand{\Tip}{\mathrm{Tip}}
 \newcommand{\Pred}{\mathrm{Pred}}
-\newcommand{\Leg}{\mathrm{Leg}}
+\newcommand{\Lega}{\mathrm{Legacy}}
 \newcommand{\Nodes}{\mathrm{Nodes}}
 
 
@@ -42,7 +42,7 @@
 
 \section{Definition}
 
-A \emph{haploid tree process} is a \emph{stochastic process},
+A \emph{recombinant haploid tree process} is a \emph{stochastic process},
 which has an underlying probability space $(\Omega, \mathcal{F}, P)$,
 along with the following underlying fixed givens:
 
@@ -80,8 +80,10 @@ For any haploid lineage $L \in \Haplin$, a subset $S \subset L$ is a \emph{subli
 \mathstop
 \]
 
+For convenience, let $\At(L) = \At(\Tip(L))$ for any lineage $L$.
 
-\subsection{Haploid tree process}
+
+\subsection{Tree process}
 
 A set of haploid lineages $T \subset \Haplin$ is a \emph{haploid tree} iff for every member lineage $L \in T$, every sublineage of $L$ is also a member of $T$.
 
@@ -102,7 +104,7 @@ such that
 under set inclusion order.
 \end{enumerate}
 
-As a stochastic process, a recombinant tree process is a time-indexed random variable taking values in the
+As a stochastic process, a recombinant haploid tree process is a time-indexed random variable taking values in the
 range of functions from loci $\Loc$ to haploid trees.
 
 Let $\bigcup \Tree$ denote $\bigcup_{t \in \Time} \bigcup \Tree_t$.
@@ -111,18 +113,71 @@ For all $h \in \bigcup \Tree$,
 $\Lin(\ell, h)$ equals the $L \in \Tree^\ell_{\At(h)}$ such that $\Tip(L) = h$.
 
 
-\section{An embedded Ancestral Recombination Graph}
+\section{Related definitions}
+
+\subsection{Kingman $n$-coalescent}
+
+The Kingman $n$-coalescent \cite{kingman_coalescent_1982} is defined
+as a stochastic process terminating at a sample of haploids.
+As a time-indexed random variable, the $n$-coalescent takes values
+as equivalence relations (partitions) on the samples.
+
+Given a fixed locus $\ell \in \Loc$, and a sample population $S \subset \Hap$,
+where for some time $z \in Time$, for all $a \in S$, $z = At(a)$,
+a recombinant haploid tree process defines a backward-time-indexed random
+variable $X_r$ that takes the same values as the Kingman $n$-coalescent, but not necessarily
+with the same probability distribution.
+The value of $X_r$ with $r \in [0, \infty)$ (in reverse time)
+is the equivalence relation defined by
+\[
+  \left\{ (a,b) \in S^2 : \At(\Lin(\ell, a) \cap \Lin(\ell, b)) \ge (z -r) \right\}
+\]
+
+
+\subsection{King genealogy tree processes}
+
+King \cite{king_exact_2026} extends the genealogical tree structure of the Kingman
+$n$-coalescent, but with some differences:
+\begin{enumerate}
+  \item samples need not be at the same time,
+  \item partitions are used instead of equivalence relations,
+  \item time is indexed forwards, not backwards, and
+  \item time zero is fixed to the root of the genealogical tree.
+\end{enumerate}
+
+Given a fixed locus $\ell \in \Loc$, a sample population $S \subset \Hap$, a recombinant
+haploid tree process defines a \emph{shifted} forward-time-indexed random variable
+$Z_s$ that takes the same values as the genealogy tree structure in
+\cite{king_exact_2026}.
+The time index for $Z_s$ is relative to the root time $R \in \Time$, which is
+\[
+  R := \At\left( \bigcap_{a \in S} \Lin(\ell, a) \right)
+\]
+and is itself a random variable. With ancestral lineages at time $t$
+of the samples $S$ denoted
+\[
+  A(t, S) := \{ (\infty, t] \cap \Lin(\ell,a) : a \in S \}
+\mathstop
+\]
+we have
+\[
+  Z_s = \left\{ \{ a : L \subset \Lin(\ell,a) \} : L \in A(R + s, S) \right\}
+\]
+as the tree structure process in \cite{king_exact_2026}.
+
+
+\subsection{Ancestral Recombination Graph (ARG)}
 
 An ancestral recombination graph \cite{friedman_ancestral_1997}
 \cite{hein_gene_2005} \cite{wakeley_coalescent_2009} of a sampled
-population is embedded in any outcome of any haploid lineage process.
-We formaly show the
+population is embedded in any outcome of any recombinant haploid lineage process.
+We formally show the
 exact embedding using the gARG formalism \cite{wong_general_2024}.
 
 We start by defining the \emph{genetic legacy} of an ancestral haploid
-$h \in \Hap$ for sample population $S \subseteq \Hap$ to be
+$h \in \Hap$ for a sample population $S \subseteq \Hap$ to be
 \[
-  \Leg(h, S) := \{ (\ell, d) \in \Loc \times S : h \in \Lin(\ell, d) \}
+  \Lega(h, S) := \{ (\ell, d) \in \Loc \times S : h \in \Lin(\ell, d) \}
 \mathstop
 \]
 
@@ -131,19 +186,19 @@ sample population $S$ originally copied from ancestral haploid $h$
 (with or without mutations).
 
 Genetic legacy for a sample population $S$ induces the following
-equivalence relationship over pairs of haploids $h_1$ and $h_2$ in
+equivalence relation over pairs of haploids $h_1$ and $h_2$ in
 $\Hap$:
 \[
-h_1 \simeq_S h_2 \ := \ \Leg(h_1, S) = \Leg(h_2, S)
+h_1 \simeq_S h_2 \ := \ \Lega(h_1, S) = \Lega(h_2, S)
 \mathstop
 \]
 We denote the resulting equivalence class containing $h \in \Hap$ as
 \[
-{[h]}_S \ := \ \{ h' : \Leg(h', S) = \Leg(h, S) \}
+{[h]}_S \ := \ \{ h' : \Lega(h', S) = \Lega(h, S) \}
 \mathstop
 \]
 
-In this equivalence relationship, haploids are considered equivalent if
+In this equivalence relation, haploids are considered equivalent if
 they have the same genetic legacy for the sample population $S$.
 
 A convenient choice for an embedded gARG \cite{wong_general_2024} is
@@ -159,7 +214,7 @@ node pairs $(C, P) \in \Nodes(S)^2$ where
   \Pred(\ell, h) \in P \text{ for some $h \in C$ and some $\ell \in \Loc$ .}
 \]
 
-In the gARG, anotations are added for each graph edge (pair of child
+In the gARG, annotations are added for each graph edge (pair of child
 and parent nodes). This annotation is the set of locations through which
 genetic information has been copied from parent to child. In the
 following interpretation, the only locations of interest are those for
