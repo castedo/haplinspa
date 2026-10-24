@@ -1,11 +1,12 @@
 % This file is used to provide a draft preview via LaTeX
 \RequirePackage[l2tabu, orthodox]{nag}
 
-\documentclass{article}
-\usepackage{amsmath, amssymb}
-\usepackage{hyperref}
+\documentclass[parskip=half]{scrartcl}
 \renewcommand{\familydefault}{\sfdefault}
-\usepackage{parskip}
+
+\usepackage{amsmath, amssymb}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{orcidlink}
 
 \usepackage{stmaryrd}
 \usepackage{fontspec}
@@ -13,7 +14,14 @@
 \newunicodechar{⟦}{\llbracket}
 \newunicodechar{⟧}{\rrbracket}
 
+\usepackage{abstract}
 \usepackage[style=numeric]{biblatex}
+
+\usepackage{draftwatermark}
+\SetWatermarkLightness{0.9}
+
+\usepackage{lineno}
+\setlength\linenumbersep{20pt}
 
 % The content of the document is included from a separate file
 \input{doc.tex}

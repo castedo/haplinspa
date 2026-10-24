@@ -45,7 +45,7 @@
   <body>
 <sec id="definition">
   <title>Definition</title>
-  <p>A <italic>recombinant haploid tree process</italic> is a <italic>stochastic process</italic>,
+  <p>A <italic>haploid lineage tree process</italic> is a <italic>stochastic process</italic>,
   which has an underlying probability space <inline-formula><alternatives>
   <tex-math><![CDATA[(\Omega, \mathcal{F}, P)]]></tex-math>
   <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>Ω</mml:mi><mml:mo>,</mml:mo><mml:mi>ℱ</mml:mi><mml:mo>,</mml:mo><mml:mi>P</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:math></alternatives></inline-formula>,
@@ -150,11 +150,11 @@
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>T</mml:mi></mml:math></alternatives></inline-formula>.</p>
     <p>The <italic>union</italic> of a haploid tree <inline-formula><alternatives>
     <tex-math><![CDATA[T]]></tex-math>
-    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>T</mml:mi></mml:math></alternatives></inline-formula> is the union of all its member lineages is denoted
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>T</mml:mi></mml:math></alternatives></inline-formula> is the union of all its member lineages, denoted
     <inline-formula><alternatives>
     <tex-math><![CDATA[\bigcup T]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo>⋃</mml:mo><mml:mi>T</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>.</p>
-    <p>A <italic>recombinant haploid tree process</italic> is a family of haploid tree valued random variables,
+    <p>A <italic>haploid lineage tree process</italic> is a family of haploid tree-valued random variables,
     index by time (with subscript) and locus (with superscript),
     <disp-formula><alternatives>
     <tex-math><![CDATA[\{ \mathrm{Tree}^\ell_t : t \in \Re, \ell \in \mathrm{Loci}\}]]></tex-math>
@@ -183,7 +183,7 @@
         under set inclusion order.</p>
       </list-item>
     </list>
-    <p>As a stochastic process, a recombinant haploid tree process is a time-indexed random variable taking values in the
+    <p>As a stochastic process, a haploid lineage tree process is a time-indexed random variable taking values in the
     range of functions from loci <inline-formula><alternatives>
     <tex-math><![CDATA[\mathrm{Loci}]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">c</mml:mi><mml:mi mathvariant="normal">i</mml:mi></mml:mrow></mml:math></alternatives></inline-formula> to haploid trees.</p>
@@ -224,13 +224,13 @@
     <tex-math><![CDATA[S \subset \mathrm{Haps}]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>S</mml:mi><mml:mo>⊂</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi><mml:mi mathvariant="normal">s</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>,
     where for some time <inline-formula><alternatives>
-    <tex-math><![CDATA[z \in Time]]></tex-math>
-    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>z</mml:mi><mml:mo>∈</mml:mo><mml:mi>T</mml:mi><mml:mi>i</mml:mi><mml:mi>m</mml:mi><mml:mi>e</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>, for all <inline-formula><alternatives>
+    <tex-math><![CDATA[z \in \mathrm{Time}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>z</mml:mi><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">T</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">m</mml:mi><mml:mi mathvariant="normal">e</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>, for all <inline-formula><alternatives>
     <tex-math><![CDATA[a \in S]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>a</mml:mi><mml:mo>∈</mml:mo><mml:mi>S</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>, <inline-formula><alternatives>
-    <tex-math><![CDATA[z = At(a)]]></tex-math>
-    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>z</mml:mi><mml:mo>=</mml:mo><mml:mi>A</mml:mi><mml:mi>t</mml:mi><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>a</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>,
-    a recombinant haploid tree process defines a backward-time-indexed random
+    <tex-math><![CDATA[z = \mathrm{At}(a)]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>z</mml:mi><mml:mo>=</mml:mo><mml:mrow><mml:mi mathvariant="normal">A</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>a</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>,
+    a haploid lineage tree process defines a backward-time-indexed random
     variable <inline-formula><alternatives>
     <tex-math><![CDATA[X_r]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>X</mml:mi><mml:mi>r</mml:mi></mml:msub></mml:math></alternatives></inline-formula> that takes the same values as the Kingman <inline-formula><alternatives>
@@ -244,7 +244,7 @@
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>r</mml:mi><mml:mo>∈</mml:mo><mml:mo stretchy="false" form="prefix">[</mml:mo><mml:mn>0</mml:mn><mml:mo>,</mml:mo><mml:mi>∞</mml:mi><mml:mo stretchy="false" form="postfix">)</mml:mo></mml:mrow></mml:math></alternatives></inline-formula> (in reverse time)
     is the equivalence relation defined by
     <disp-formula><alternatives>
-    <tex-math><![CDATA[\left\{ (a,b) \in S^2 : \mathrm{At}(\mathrm{Lin}(\ell, a) \cap \mathrm{Lin}(\ell, b)) \ge (z -r) \right\}]]></tex-math>
+    <tex-math><![CDATA[\left\{ (a,b) \in S^2 : \mathrm{At}(\mathrm{Lin}(\ell, a) \cap \mathrm{Lin}(\ell, b)) \ge (z - r) \right\}]]></tex-math>
     <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">{</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>a</mml:mi><mml:mo>,</mml:mo><mml:mi>b</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>∈</mml:mo><mml:msup><mml:mi>S</mml:mi><mml:mn>2</mml:mn></mml:msup><mml:mo>:</mml:mo><mml:mrow><mml:mi mathvariant="normal">A</mml:mi><mml:mi mathvariant="normal">t</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">n</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>,</mml:mo><mml:mi>a</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>∩</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">i</mml:mi><mml:mi mathvariant="normal">n</mml:mi></mml:mrow><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mo>ℓ</mml:mo><mml:mo>,</mml:mo><mml:mi>b</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>≥</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>z</mml:mi><mml:mo>−</mml:mo><mml:mi>r</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo stretchy="true" form="postfix">}</mml:mo></mml:mrow></mml:math></alternatives></disp-formula></p>
   </sec>
   <sec id="king-genealogy-tree-processes">
@@ -271,8 +271,8 @@
     <tex-math><![CDATA[\ell \in \mathrm{Loci}]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo>ℓ</mml:mo><mml:mo>∈</mml:mo><mml:mrow><mml:mi mathvariant="normal">L</mml:mi><mml:mi mathvariant="normal">o</mml:mi><mml:mi mathvariant="normal">c</mml:mi><mml:mi mathvariant="normal">i</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>, a sample population <inline-formula><alternatives>
     <tex-math><![CDATA[S \subset \mathrm{Haps}]]></tex-math>
-    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>S</mml:mi><mml:mo>⊂</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi><mml:mi mathvariant="normal">s</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>, a recombinant
-    haploid tree process defines a <italic>shifted</italic> forward-time-indexed random variable
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>S</mml:mi><mml:mo>⊂</mml:mo><mml:mrow><mml:mi mathvariant="normal">H</mml:mi><mml:mi mathvariant="normal">a</mml:mi><mml:mi mathvariant="normal">p</mml:mi><mml:mi mathvariant="normal">s</mml:mi></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>, a haploid
+    lineage tree process defines a <italic>shifted</italic> forward-time-indexed random variable
     <inline-formula><alternatives>
     <tex-math><![CDATA[Z_s]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>Z</mml:mi><mml:mi>s</mml:mi></mml:msub></mml:math></alternatives></inline-formula> that takes the same values as the genealogy tree structure in<sup><xref alt="2" rid="ref-king_exact_2026" ref-type="bibr">2</xref></sup>.
@@ -304,7 +304,7 @@
     <title>Ancestral Recombination Graph (ARG)</title>
     <p>An ancestral recombination graph<sup><xref alt="3" rid="ref-friedman_ancestral_1997" ref-type="bibr">3</xref></sup>
     <sup><xref alt="4" rid="ref-hein_gene_2005" ref-type="bibr">4</xref></sup><sup><xref alt="5" rid="ref-wakeley_coalescent_2009" ref-type="bibr">5</xref></sup> of a sampled
-    population is embedded in any outcome of any recombinant haploid lineage process.
+    population is embedded in any outcome of any haploid lineage tree process.
     We formally show the
     exact embedding using the gARG formalism<sup><xref alt="6" rid="ref-wong_general_2024" ref-type="bibr">6</xref></sup>.</p>
     <p>We start by defining the <italic>genetic legacy</italic> of an ancestral haploid
