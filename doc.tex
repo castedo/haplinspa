@@ -1,11 +1,12 @@
 \addbibresource{references.bib}
 
-\title{Recombinant Haploid Tree Process}
-\author{E. Castedo Ellerman}
+\title{Haploid Lineage Tree Process}
+\author{E. Castedo Ellerman, \orcidlink{0000-0002-5014-4809}}
 
 \begin{document}
 \maketitle
 
+\linenumbers
 
 \newcommand{\mathstop}{\text{ .}}
 \newcommand{\At}{\mathrm{At}}
@@ -42,7 +43,7 @@
 
 \section{Definition}
 
-A \emph{recombinant haploid tree process} is a \emph{stochastic process},
+A \emph{haploid lineage tree process} is a \emph{stochastic process},
 which has an underlying probability space $(\Omega, \mathcal{F}, P)$,
 along with the following underlying fixed givens:
 
@@ -87,10 +88,10 @@ For convenience, let $\At(L) = \At(\Tip(L))$ for any lineage $L$.
 
 A set of haploid lineages $T \subset \Haplin$ is a \emph{haploid tree} iff for every member lineage $L \in T$, every sublineage of $L$ is also a member of $T$.
 
-The \emph{union} of a haploid tree $T$ is the union of all its member lineages is denoted
+The \emph{union} of a haploid tree $T$ is the union of all its member lineages, denoted
 $\bigcup T$.
 
-A \emph{recombinant haploid tree process} is a family of haploid tree valued random variables,
+A \emph{haploid lineage tree process} is a family of haploid tree-valued random variables,
 index by time (with subscript) and locus (with superscript),
 \[
 \{ \Tree^\ell_t : t \in \Re, \ell \in \Loc \}
@@ -104,7 +105,7 @@ such that
 under set inclusion order.
 \end{enumerate}
 
-As a stochastic process, a recombinant haploid tree process is a time-indexed random variable taking values in the
+As a stochastic process, a haploid lineage tree process is a time-indexed random variable taking values in the
 range of functions from loci $\Loc$ to haploid trees.
 
 Let $\bigcup \Tree$ denote $\bigcup_{t \in \Time} \bigcup \Tree_t$.
@@ -123,14 +124,14 @@ As a time-indexed random variable, the $n$-coalescent takes values
 as equivalence relations (partitions) on the samples.
 
 Given a fixed locus $\ell \in \Loc$, and a sample population $S \subset \Hap$,
-where for some time $z \in Time$, for all $a \in S$, $z = At(a)$,
-a recombinant haploid tree process defines a backward-time-indexed random
+where for some time $z \in \Time$, for all $a \in S$, $z = \At(a)$,
+a haploid lineage tree process defines a backward-time-indexed random
 variable $X_r$ that takes the same values as the Kingman $n$-coalescent, but not necessarily
 with the same probability distribution.
 The value of $X_r$ with $r \in [0, \infty)$ (in reverse time)
 is the equivalence relation defined by
 \[
-  \left\{ (a,b) \in S^2 : \At(\Lin(\ell, a) \cap \Lin(\ell, b)) \ge (z -r) \right\}
+  \left\{ (a,b) \in S^2 : \At(\Lin(\ell, a) \cap \Lin(\ell, b)) \ge (z - r) \right\}
 \]
 
 
@@ -145,8 +146,8 @@ $n$-coalescent, but with some differences:
   \item time zero is fixed to the root of the genealogical tree.
 \end{enumerate}
 
-Given a fixed locus $\ell \in \Loc$, a sample population $S \subset \Hap$, a recombinant
-haploid tree process defines a \emph{shifted} forward-time-indexed random variable
+Given a fixed locus $\ell \in \Loc$, a sample population $S \subset \Hap$, a haploid
+lineage tree process defines a \emph{shifted} forward-time-indexed random variable
 $Z_s$ that takes the same values as the genealogy tree structure in
 \cite{king_exact_2026}.
 The time index for $Z_s$ is relative to the root time $R \in \Time$, which is
@@ -170,7 +171,7 @@ as the tree structure process in \cite{king_exact_2026}.
 
 An ancestral recombination graph \cite{friedman_ancestral_1997}
 \cite{hein_gene_2005} \cite{wakeley_coalescent_2009} of a sampled
-population is embedded in any outcome of any recombinant haploid lineage process.
+population is embedded in any outcome of any haploid lineage tree process.
 We formally show the
 exact embedding using the gARG formalism \cite{wong_general_2024}.
 
