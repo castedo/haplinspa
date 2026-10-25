@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+SRCDIR=$(realpath $(dirname "$0"))
+podman run \
+    --rm -it \
+    -v=$SRCDIR:/mnt -w=/mnt \
+    registry.gitlab.com/ellerman/nest/pub/core:26436-feb \
+    just build
