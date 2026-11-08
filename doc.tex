@@ -11,8 +11,9 @@
 \newcommand{\mathstop}{\text{ .}}
 \newcommand{\At}{\mathrm{At}}
 \newcommand{\Time}{\mathrm{Time}}
-\newcommand{\Hap}{\mathrm{Haps}}
-\newcommand{\Loc}{\mathrm{Loci}}
+\newcommand{\Places}{\mathrm{Places}}
+\newcommand{\Haps}{\mathrm{Haps}}
+\newcommand{\Loci}{\mathrm{Loci}}
 \newcommand{\Lin}{\mathrm{Lin}}
 \newcommand{\Haplin}{\mathrm{Haplins}}
 \newcommand{\Tree}{\mathrm{Tree}}
@@ -63,25 +64,35 @@ the \nameref{sec:related-work}~section specifies the exact mathematical correspo
 \section{Definition}
 \label{sec:definition}
 
-A \emph{haploid lineage tree process} is a \emph{stochastic process},
-which has an underlying probability space $(\Omega, \mathcal{F}, P)$,
-along with the following underlying fixed givens:
+A \emph{haploid lineage tree process} is a \emph{stochastic
+process}~\cite{ash_probability_2000, pishro_nik_2014}, which is a family of random
+variables indexed by a set typically representing time.
 
+The qualities required of a haploid lineage tree process are based on three given sets:
 \begin{enumerate}
-\item a set of \emph{potential haploids}, denoted $\Hap$,
-\item a \emph{time function}, denoted $\At$, mapping $\Hap$ to $\Re$,
-\item a set of chromosomal loci, denoted $\Loc$, and
-\item a set of real times $\Time \subset \Re$.
+\item an index set $\Time \subset \Re$,
+\item a measurable space of chromosomal loci, denoted $\Loci$, and
+\item a measurable space of "birthplaces", denoted $\Places$.
 \end{enumerate}
 
-Depending on the application, potential haploids might be interpreted as potential organisms, gametes, or spores.
+We define a space of potential haploids as
+\[
+\Haps := \Time \times \Places
+\]
+and a "birth" time function mapping $\Haps$ to $\Re$ as
+\[
+  \At((t,x)) := t
+\]
+
+Depending on the application, potential haploids might describe potential organisms, gametes, or spores.
+
 
 \subsection{Haploid Lineages}
 
 A \emph{haploid lineage} represents all the haploids transmitting genetic information at a
 genomic locus to a descendant haploid.
 
-Formally, a \emph{haploid lineage} is a set of haploids, $L \subset \Hap$, such that,
+Formally, a \emph{haploid lineage} is a set of haploids, $L \subset \Haps$, such that,
 with the ordering induced by $\At$, $L$ is
 \begin{enumerate}
 \item totally (linearly) ordered,
@@ -114,19 +125,19 @@ $\bigcup T$.
 A \emph{haploid lineage tree process} is a family of haploid tree-valued random variables,
 indexed by time (with subscript) and locus (with superscript),
 \[
-\{ \Tree^\ell_t : t \in \Re, \ell \in \Loc \}
+\{ \Tree^\ell_t : t \in \Re, \ell \in \Loci \}
 \]
 such that
 \begin{enumerate}
-\item $\forall t \in \Time \left( \left| \{ \bigcup \Tree^\ell_t : \ell \in \Loc \} \right| = 1 \right)$
+\item $\forall t \in \Time \left( \left| \{ \bigcup \Tree^\ell_t : \ell \in \Loci \} \right| = 1 \right)$
       and thus $\bigcup \Tree_t$ is an unambiguous set of haploids,
 \item $\forall t \in \Time, h \in \bigcup \Tree_t \left( \At(h) \le t \right)$, and
-\item for every $\ell \in \Loc$, $\{ \Tree^\ell_t : t \in \Re \}$ has a total increasing ordering
+\item for every $\ell \in \Loci$, $\{ \Tree^\ell_t : t \in \Re \}$ has a total increasing ordering
 under set inclusion order.
 \end{enumerate}
 
 As a stochastic process, a haploid lineage tree process is a time-indexed random variable taking values in the
-range of functions from loci $\Loc$ to haploid trees.
+range of functions from loci $\Loci$ to haploid trees.
 
 Let $\bigcup \Tree$ denote $\bigcup_{t \in \Time} \bigcup \Tree_t$.
 
@@ -144,7 +155,7 @@ as a stochastic process terminating at a sample of haploids.
 As a time-indexed random variable, the $n$-coalescent takes values
 as equivalence relations (partitions) on the samples.
 
-Given a fixed locus $\ell \in \Loc$, and a sample population $S \subset \Hap$,
+Given a fixed locus $\ell \in \Loci$, and a sample population $S \subset \Haps$,
 where for some time $z \in \Time$, for all $a \in S$, $z = \At(a)$,
 a haploid lineage tree process defines a backward-time-indexed random
 variable $X_r$ that takes the same values as the Kingman $n$-coalescent, but not necessarily
@@ -167,7 +178,7 @@ $n$-coalescent, but with some differences:
   \item time zero is fixed to the root of the genealogical tree.
 \end{enumerate}
 
-Given a fixed locus $\ell \in \Loc$, a sample population $S \subset \Hap$, a haploid
+Given a fixed locus $\ell \in \Loci$, a sample population $S \subset \Haps$, a haploid
 lineage tree process defines a \emph{shifted} forward-time-indexed random variable
 $Z_s$ that takes the same values as the genealogy tree structure in
 \cite{king_exact_2026}.
@@ -197,9 +208,9 @@ We formally show the
 exact embedding using the gARG formalism \cite{wong_general_2024}.
 
 We start by defining the \emph{genetic legacy} of an ancestral haploid
-$h \in \Hap$ for a sample population $S \subseteq \Hap$ to be
+$h \in \Haps$ for a sample population $S \subseteq \Haps$ to be
 \[
-  \Lega(h, S) := \{ (\ell, d) \in \Loc \times S : h \in \Lin(\ell, d) \}
+  \Lega(h, S) := \{ (\ell, d) \in \Loci \times S : h \in \Lin(\ell, d) \}
 \mathstop
 \]
 
@@ -209,12 +220,12 @@ sample population $S$ originally copied from ancestral haploid $h$
 
 Genetic legacy for a sample population $S$ induces the following
 equivalence relation over pairs of haploids $h_1$ and $h_2$ in
-$\Hap$:
+$\Haps$:
 \[
 h_1 \simeq_S h_2 \ := \ \Lega(h_1, S) = \Lega(h_2, S)
 \mathstop
 \]
-We denote the resulting equivalence class containing $h \in \Hap$ as
+We denote the resulting equivalence class containing $h \in \Haps$ as
 \[
 {[h]}_S \ := \ \{ h' : \Lega(h', S) = \Lega(h, S) \}
 \mathstop
@@ -226,14 +237,14 @@ they have the same genetic legacy for the sample population $S$.
 A convenient choice for an embedded gARG \cite{wong_general_2024} is
 to set the gARG nodes (vertices) to be the equivalence classes:
 \[
-   \Nodes(S) := \{ {[h]}_S : h \in \Hap \}
+   \Nodes(S) := \{ {[h]}_S : h \in \Haps \}
 \mathstop
 \]
 
 The (unannotated) graph edges of the gARG are chosen as child-parent
 node pairs $(C, P) \in \Nodes(S)^2$ where
 \[
-  \Pred(\ell, h) \in P \text{ for some $h \in C$ and some $\ell \in \Loc$ .}
+  \Pred(\ell, h) \in P \text{ for some $h \in C$ and some $\ell \in \Loci$ .}
 \]
 
 In the gARG, annotations are added for each graph edge (pair of child
@@ -244,7 +255,7 @@ which genetic information has been transmitted into the sample
 population $S$. With this interpretation, the annotation for edge
 $(C,P)$ is
 \[
-  \{ \ell \in \Loc :
+  \{ \ell \in \Loci :
      C \subseteq \Lin(\ell, h) \text{ and } P \subseteq \Lin(\ell, h) \text{ for some $h \in S$}
   \}
 \mathstop
