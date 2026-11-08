@@ -92,11 +92,14 @@ Depending on the application, potential haploids might describe potential organi
 A \emph{haploid lineage} represents all the haploids transmitting genetic information at a
 genomic locus to a descendant haploid.
 
-Formally, a \emph{haploid lineage} is a set of haploids, $L \subset \Haps$, such that,
-with the ordering induced by $\At$, $L$ is
+Formally, a \emph{haploid lineage} is a well-ordered set of haploids under the order of
+$-\At$ (backward-in-time).
+
+Or equivalently defined, a \emph{haploid lineage} is a set $L$ of haploids such that,
+under the order induced by $\At$:
 \begin{enumerate}
-\item totally (linearly) ordered,
-\item strictly ordered, and
+\item $L$ is totally (linearly) ordered,
+\item $L$ is strictly ordered, and
 \item every subset of $L$ has a maximum (newest) haploid.
 \end{enumerate}
 
@@ -106,14 +109,13 @@ The maximum (newest) haploid in a haploid lineage $L$ is denoted $\Tip(L)$.
 Let $\Pred(\ell, h)$ denote $\Tip(\Lin(\ell, h) / \{h\})$, that is, the predecessor
 haploid of $h$ from which genetic information was copied at locus $\ell$.
 
-For any haploid lineage $L \in \Haplin$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
+For convenience, extend $\At$ to any lineage $L$ by letting $\At(L) = \At(\Tip(L))$.
+
+For any haploid lineage $L$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
 \[
-\forall x \in L, y \in S: \At(x) < \At(y) \implies x \in S
+\forall x \in L, y \in S \left( \At(x) < \At(y) \implies x \in S \right)
 \mathstop
 \]
-
-For convenience, let $\At(L) = \At(\Tip(L))$ for any lineage $L$.
-
 
 \subsection{Tree Process}
 
@@ -123,9 +125,9 @@ The \emph{union} of a haploid tree $T$ is the union of all its member lineages, 
 $\bigcup T$.
 
 A \emph{haploid lineage tree process} is a family of haploid tree-valued random variables,
-indexed by time (with subscript) and locus (with superscript),
+indexed by a time (with subscript) and locus (with superscript),
 \[
-\{ \Tree^\ell_t : t \in \Re, \ell \in \Loci \}
+\{ \Tree^\ell_t : t \in \Time, \ell \in \Loci \}
 \]
 such that
 \begin{enumerate}
