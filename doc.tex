@@ -23,25 +23,45 @@
 
 
 \begin{abstract}
-\textbf{STAGE:} WORKING DRAFT
-
-\textbf{DOCUMENT TYPE:} Formal Mathematical Definition
-
-\textbf{OBJECTIVES:}
-
-\begin{itemize}
-\item Gather feedback on terminology and connections to existing research.
-\item A mathematical definition that is precisely a stochastic process with close
-  correspondence to the transmission of genetic information through haploid cells in a
-  population.
-\item
-  Mathematical definitions for technical discussions relating to
-  ancestral recombination graphs and Markov genealogy processes.
-\end{itemize}
+This document mathematically defines a type of stochastic process: a \emph{Haploid
+  Lineage Tree Process}. It models lines of genetic transmission via haploid cells in a population.
+The motivation is to explicitly model a biological process that generates empirical genetic
+  data drawn from a reproducing population of organisms.
+In contrast to the Kingman $n$-coalescent, a Haploid Lineage Tree Process is not defined
+  backward-in-time from a given set of haploid samples, but instead generates them
+  forward-in-time, akin to a branching process.
 \end{abstract}
 
 
+\section{Introduction}
+
+A \emph{stochastic process} is a mathematical model from probability theory that is
+widely used in many fields of applied mathematics.
+It consists of a family of time-indexed \emph{random variables}.
+We seek random variables taking values that clearly model a biological phenomenon. Our
+interest is in defining the type of those values, but not specifically their probabilities.
+We seek a shared basis for many specialized models that do define
+specific probability models, such as the Kingman $n$-coalescent.
+Some motivations for such an underlying basis include:
+\begin{itemize}
+  \item better understanding and evaluation of the assumptions linking mathematical and
+    biological models, and
+  \item deriving different mathematical results under different mathematical conditions.
+\end{itemize}
+
+The random variables in the \nameref{sec:definition}~section model gene genealogies
+\cite{wakeley_coalescent_2009} per locus across the genomes of haploid cells.
+After the definition,
+the \nameref{sec:related-work}~section specifies the exact mathematical correspondences to
+\begin{itemize}
+  \item the Kingman $n$-coalescent \cite{kingman_coalescent_1982},
+  \item the genealogical tree structure defined by King et al.~\cite{king_exact_2026}, and
+  \item the genome Ancestral Recombination Graph (gARG) in Wong et al.~\cite{wong_general_2024}.
+\end{itemize}
+
+
 \section{Definition}
+\label{sec:definition}
 
 A \emph{haploid lineage tree process} is a \emph{stochastic process},
 which has an underlying probability space $(\Omega, \mathcal{F}, P)$,
@@ -56,7 +76,7 @@ along with the following underlying fixed givens:
 
 Depending on the application, potential haploids might be interpreted as potential organisms, gametes, or spores.
 
-\subsection{Haploid lineages}
+\subsection{Haploid Lineages}
 
 A \emph{haploid lineage} represents all the haploids transmitting genetic information at a
 genomic locus to a descendant haploid.
@@ -84,7 +104,7 @@ For any haploid lineage $L \in \Haplin$, a subset $S \subset L$ is a \emph{subli
 For convenience, let $\At(L) = \At(\Tip(L))$ for any lineage $L$.
 
 
-\subsection{Tree process}
+\subsection{Tree Process}
 
 A set of haploid lineages $T \subset \Haplin$ is a \emph{haploid tree} iff for every member lineage $L \in T$, every sublineage of $L$ is also a member of $T$.
 
@@ -92,7 +112,7 @@ The \emph{union} of a haploid tree $T$ is the union of all its member lineages, 
 $\bigcup T$.
 
 A \emph{haploid lineage tree process} is a family of haploid tree-valued random variables,
-index by time (with subscript) and locus (with superscript),
+indexed by time (with subscript) and locus (with superscript),
 \[
 \{ \Tree^\ell_t : t \in \Re, \ell \in \Loc \}
 \]
@@ -114,9 +134,10 @@ For all $h \in \bigcup \Tree$,
 $\Lin(\ell, h)$ equals the $L \in \Tree^\ell_{\At(h)}$ such that $\Tip(L) = h$.
 
 
-\section{Related definitions}
+\section{Related Work}
+\label{sec:related-work}
 
-\subsection{Kingman $n$-coalescent}
+\subsection{Kingman $n$-Coalescent}
 
 The Kingman $n$-coalescent \cite{kingman_coalescent_1982} is defined
 as a stochastic process terminating at a sample of haploids.
@@ -135,7 +156,7 @@ is the equivalence relation defined by
 \]
 
 
-\subsection{King genealogy tree processes}
+\subsection{King Genealogy Tree Processes}
 
 King \cite{king_exact_2026} extends the genealogical tree structure of the Kingman
 $n$-coalescent, but with some differences:

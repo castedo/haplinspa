@@ -1,5 +1,8 @@
 #!/usr/bin/env -S just --justfile
 
+list:
+    just --list
+
 build:
   mkdir -p _preview
   latexmk -pdf -pdflatex="lualatex" \
