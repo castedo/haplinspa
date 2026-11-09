@@ -9,13 +9,13 @@
 \linenumbers
 
 \newcommand{\mathstop}{\text{ .}}
+\newcommand {\R}{\mathbb{R}}
 \newcommand{\At}{\mathrm{At}}
 \newcommand{\Time}{\mathrm{Time}}
 \newcommand{\Places}{\mathrm{Places}}
 \newcommand{\Haps}{\mathrm{Haps}}
 \newcommand{\Loci}{\mathrm{Loci}}
 \newcommand{\Lin}{\mathrm{Lin}}
-\newcommand{\Haplin}{\mathrm{Haplins}}
 \newcommand{\Tree}{\mathrm{Tree}}
 \newcommand{\Tip}{\mathrm{Tip}}
 \newcommand{\Pred}{\mathrm{Pred}}
@@ -50,7 +50,7 @@ Some motivations for such an underlying basis include:
   \item deriving different mathematical results under different mathematical conditions.
 \end{itemize}
 
-The random variables in the \nameref{sec:definition}~section model gene genealogies
+The random variables in the \nameref{sec:definitions}~section model gene genealogies
 \cite{wakeley_coalescent_2009} per locus across the genomes of haploid cells.
 After the definition,
 the \nameref{sec:related-work}~section specifies the exact mathematical correspondences to
@@ -61,16 +61,16 @@ the \nameref{sec:related-work}~section specifies the exact mathematical correspo
 \end{itemize}
 
 
-\section{Definition}
-\label{sec:definition}
+\section{Definitions}
+\label{sec:definitions}
 
 A \emph{haploid lineage tree process} is a \emph{stochastic
 process}~\cite{ash_probability_2000, pishro_nik_2014}, which is a family of random
 variables indexed by a set typically representing time.
 
-The qualities required of a haploid lineage tree process are based on three given sets:
+The features required of a haploid lineage tree process are based on three givens:
 \begin{enumerate}
-\item an index set $\Time \subset \Re$,
+\item an index set $\Time \subseteq \R$,
 \item a measurable space of chromosomal loci, denoted $\Loci$, and
 \item a measurable space of "birthplaces", denoted $\Places$.
 \end{enumerate}
@@ -79,7 +79,7 @@ We define a space of potential haploids as
 \[
 \Haps := \Time \times \Places
 \]
-and a "birth" time function mapping $\Haps$ to $\Re$ as
+and a "birth" time function mapping $\Haps$ to $\R$ as
 \[
   \At((t,x)) := t
 \]
@@ -92,10 +92,12 @@ Depending on the application, potential haploids might describe potential organi
 A \emph{haploid lineage} represents all the haploids transmitting genetic information at a
 genomic locus to a descendant haploid.
 
+\begin{defin}
 Formally, a \emph{haploid lineage} is a well-ordered set of haploids under the order of
 $-\At$ (backward-in-time).
+\end{defin}
 
-Or equivalently defined, a \emph{haploid lineage} is a set $L$ of haploids such that,
+An equivalent definition is that a \emph{haploid lineage} is a set $L$ of haploids such that,
 under the order induced by $\At$:
 \begin{enumerate}
 \item $L$ is totally (linearly) ordered,
@@ -103,7 +105,7 @@ under the order induced by $\At$:
 \item every subset of $L$ has a maximum (newest) haploid.
 \end{enumerate}
 
-The set of all such \emph{haploid lineages} is denoted $\Haplin$.
+Note that the empty set is not a lineage.
 
 The maximum (newest) haploid in a haploid lineage $L$ is denoted $\Tip(L)$.
 Let $\Pred(\ell, h)$ denote $\Tip(\Lin(\ell, h) / \{h\})$, that is, the predecessor
@@ -111,40 +113,65 @@ haploid of $h$ from which genetic information was copied at locus $\ell$.
 
 For convenience, extend $\At$ to any lineage $L$ by letting $\At(L) = \At(\Tip(L))$.
 
+\begin{defin}
 For any haploid lineage $L$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
 \[
 \forall x \in L, y \in S \left( \At(x) < \At(y) \implies x \in S \right)
 \mathstop
 \]
+\end{defin}
 
-\subsection{Tree Process}
+\begin{defin}
+The \emph{ancestral sublineage} at time $t \in \Time$ of a lineage $L$ is
+\[
+  \left\{  h \in L : \At(h) < t \right\}
+\]
+\end{defin}
 
-A set of haploid lineages $T \subset \Haplin$ is a \emph{haploid tree} iff for every member lineage $L \in T$, every sublineage of $L$ is also a member of $T$.
 
-The \emph{union} of a haploid tree $T$ is the union of all its member lineages, denoted
-$\bigcup T$.
+\begin{defin}
+A \emph{haploid lineage tree} is a set of haploid lineages $T$ where for every
+pair of member lineages $A, B \in T$, $A \cap B$ is either empty or a sublineage of both $A$ and
+$B$.
+\end{defin}
 
-A \emph{haploid lineage tree process} is a family of haploid tree-valued random variables,
+The empty set $\emptyset$ is the trivial haploid lineage tree.
+
+\begin{defin}
+Let the limit advancing to time $t \in \R \cup \{ +\infty \}$ of
+a family of time-indexed trees $\{T_s\}_{s \in \Time}$ be
+\[
+  \lim_{s \uparrow t} T_s :=
+  \bigcup_{s < t} \bigcap_{\substack{r \in [s, t) \\ r \in \Time}} T_r
+\]
+\end{defin}
+
+\begin{defin}
+A \emph{haploid lineage tree process} is a family of haploid-lineage-tree-valued random variables,
 indexed by a time (with subscript) and locus (with superscript),
 \[
 \{ \Tree^\ell_t : t \in \Time, \ell \in \Loci \}
 \]
-such that
+where for every $t \in \Time$, $\ell \in \Loci$, and $L \in \Tree^\ell_t$,
 \begin{enumerate}
-\item $\forall t \in \Time \left( \left| \{ \bigcup \Tree^\ell_t : \ell \in \Loci \} \right| = 1 \right)$
-      and thus $\bigcup \Tree_t$ is an unambiguous set of haploids,
-\item $\forall t \in \Time, h \in \bigcup \Tree_t \left( \At(h) \le t \right)$, and
-\item for every $\ell \in \Loci$, $\{ \Tree^\ell_t : t \in \Re \}$ has a total increasing ordering
-under set inclusion order.
+  \item $\At(L) \le t$,
+  \item $L \in \Tree^\ell_{\At(L)}$, and
+  \item the ancestral sublineage at time $t$ of $L$ is in $\lim_{s \uparrow t} \Tree^\ell_s$.
 \end{enumerate}
+\end{defin}
 
 As a stochastic process, a haploid lineage tree process is a time-indexed random variable taking values in the
 range of functions from loci $\Loci$ to haploid trees.
 
-Let $\bigcup \Tree$ denote $\bigcup_{t \in \Time} \bigcup \Tree_t$.
-
-For all $h \in \bigcup \Tree$,
-$\Lin(\ell, h)$ equals the $L \in \Tree^\ell_{\At(h)}$ such that $\Tip(L) = h$.
+\begin{defin}
+For all $h \in \Haps$,
+\[
+  \Lin(\ell, h) := \begin{cases}
+    L & \text{if $L \in \Tree^\ell_{\At(h)}$ and $\Tip(L) = h$}  \\
+    \emptyset & \text{otherwise}
+  \end{cases}
+\]
+\end{defin}
 
 
 \section{Related Work}
