@@ -11,4 +11,5 @@ build:
   cp preview.html _preview/index.html
 
 clean:
+  rm -rf _build
   rm -rf _preview

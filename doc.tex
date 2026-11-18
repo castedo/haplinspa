@@ -1,6 +1,6 @@
 \addbibresource{references.bib}
 
-\title{Haploid Lineage Tree Process}
+\title{Haploid Lineage Process}
 \author{E. Castedo Ellerman \orcidlink{0000-0002-5014-4809}}
 
 \begin{document}
@@ -25,10 +25,10 @@
 
 \begin{abstract}
 This document mathematically defines a type of stochastic process: a \emph{Haploid
-  Lineage Tree Process}. It models lines of genetic transmission via haploid cells in a population.
+  Lineage Process}. It models lines of genetic transmission via haploid cells in a population.
 The motivation is to explicitly model a biological process that generates empirical genetic
   data drawn from a reproducing population of organisms.
-In contrast to the Kingman $n$-coalescent, a Haploid Lineage Tree Process is not defined
+In contrast to the Kingman $n$-coalescent, a Haploid Lineage Process is not defined
   backward-in-time from a given set of haploid samples, but instead generates them
   forward-in-time, akin to a branching process.
 \end{abstract}
@@ -93,33 +93,47 @@ A \emph{haploid lineage} represents all the haploids transmitting genetic inform
 genomic locus to a descendant haploid.
 
 \begin{defin}
-Formally, a \emph{haploid lineage} is a well-ordered set of haploids under the order of
-$-\At$ (backward-in-time).
+A \emph{haploid lineage} is a set $L$ of haploids such that,
+\begin{itemize}
+\item distinct members of $L$ have distinct birth times (i.e., strictly ordered by $\At$), and
+\item every non-empty subset of $L$ has a newest haploid (i.e., maximum under $\At$).
+\end{itemize}
 \end{defin}
 
-An equivalent definition is that a \emph{haploid lineage} is a set $L$ of haploids such that,
-under the order induced by $\At$:
-\begin{enumerate}
-\item $L$ is totally (linearly) ordered,
-\item $L$ is strictly ordered, and
-\item every subset of $L$ has a maximum (newest) haploid.
-\end{enumerate}
+An equivalent definition is that a \emph{haploid lineage} is a well-ordered set of haploids
+under the order of $-\At$ (backward-in-time).
 
-Note that the empty set is not a lineage.
+For convenience, we assume \emph{lineage} always means \emph{haploid lineage}.
 
-The maximum (newest) haploid in a haploid lineage $L$ is denoted $\Tip(L)$.
-Let $\Pred(\ell, h)$ denote $\Tip(\Lin(\ell, h) / \{h\})$, that is, the predecessor
+The empty set $\emptyset$ is the trivial lineage.
+
+The newest haploid in a non-empty lineage $L$ is denoted $\Tip(L)$.
+Let $\Pred(L)$ denote $\Tip(L / \{ \Tip(L) \})$, that is, the predecessor
 haploid of $h$ from which genetic information was copied at locus $\ell$.
 
 For convenience, extend $\At$ to any lineage $L$ by letting $\At(L) = \At(\Tip(L))$.
 
 \begin{defin}
-For any haploid lineage $L$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
+For any lineage $L$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
 \[
 \forall x \in L, y \in S \left( \At(x) < \At(y) \implies x \in S \right)
 \mathstop
 \]
 \end{defin}
+
+
+\begin{defin}
+The \emph{shared lineage} of two lineages $A$ and $B$ is the intersection of $A$ and
+  $B$, denoted $A \cap B$.
+\end{defin}
+
+
+\begin{defin}
+A \emph{lineage tree} is a set $T$ of lineages where
+for all $A, B \in T$, the shared lineage $A \cap B$ is a sublineage of both $A$ and $B$.
+\end{defin}
+
+The empty set $\emptyset$ is the trivial lineage tree.
 
 \begin{defin}
 The \emph{ancestral sublineage} at time $t \in \Time$ of a lineage $L$ is
@@ -128,14 +142,6 @@ The \emph{ancestral sublineage} at time $t \in \Time$ of a lineage $L$ is
 \]
 \end{defin}
 
-
-\begin{defin}
-A \emph{haploid lineage tree} is a set of haploid lineages $T$ where for every
-pair of member lineages $A, B \in T$, $A \cap B$ is either empty or a sublineage of both $A$ and
-$B$.
-\end{defin}
-
-The empty set $\emptyset$ is the trivial haploid lineage tree.
 
 \begin{defin}
 Let the limit advancing to time $t \in \R \cup \{ +\infty \}$ of
@@ -273,7 +279,7 @@ to set the gARG nodes (vertices) to be the equivalence classes:
 The (unannotated) graph edges of the gARG are chosen as child-parent
 node pairs $(C, P) \in \Nodes(S)^2$ where
 \[
-  \Pred(\ell, h) \in P \text{ for some $h \in C$ and some $\ell \in \Loci$ .}
+  \Pred(\Lin(\ell, h)) \in P \text{ for some $h \in C$ and some $\ell \in \Loci$ .}
 \]
 
 In the gARG, annotations are added for each graph edge (pair of child
