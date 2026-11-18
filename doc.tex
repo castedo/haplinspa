@@ -64,13 +64,13 @@ the \nameref{sec:related-work}~section specifies the exact mathematical correspo
 \section{Definitions}
 \label{sec:definitions}
 
-A \emph{haploid lineage tree process} is a \emph{stochastic
+A \emph{haploid lineage process} is a \emph{stochastic
 process}~\cite{ash_probability_2000, pishro_nik_2014}, which is a family of random
-variables indexed by a set typically representing time.
+variables indexed by a set, typically representing time.
 
-The features required of a haploid lineage tree process are based on three givens:
+The features required of a haploid lineage process are based on three givens:
 \begin{enumerate}
-\item an index set $\Time \subseteq \R$,
+\item a set $\Time \subseteq \R$,
 \item a measurable space of chromosomal loci, denoted $\Loci$, and
 \item a measurable space of "birthplaces", denoted $\Places$.
 \end{enumerate}
@@ -86,8 +86,12 @@ and a "birth" time function mapping $\Haps$ to $\R$ as
 
 Depending on the application, potential haploids might describe potential organisms, gametes, or spores.
 
+The index set of a haploid lineage process can be viewed as time, but it is more
+convenient to treat its index set as $\Loci \times \Haps$, which contains $\Time$ as
+a sub-index.
 
-\subsection{Haploid Lineages}
+
+\subsection{Haploid Lineage}
 
 A \emph{haploid lineage} represents all the haploids transmitting genetic information at a
 genomic locus to a descendant haploid.
@@ -121,12 +125,13 @@ For any lineage $L$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
 \]
 \end{defin}
 
-
 \begin{defin}
 The \emph{shared lineage} of two lineages $A$ and $B$ is the intersection of $A$ and
   $B$, denoted $A \cap B$.
 \end{defin}
 
+
+\subsection{Lineage Tree}
 
 \begin{defin}
 A \emph{lineage tree} is a set $T$ of lineages where
@@ -157,49 +162,26 @@ indexed by haploid $h \in \Haps$ such that
 \end{defin}
 
 
-\begin{defin}
-The \emph{ancestral sublineage} at time $t \in \Time$ of a lineage $L$ is
-\[
-  \left\{  h \in L : \At(h) < t \right\}
-\]
-\end{defin}
-
+\subsection{Stochastic Process}
 
 \begin{defin}
-Let the limit advancing to time $t \in \R \cup \{ +\infty \}$ of
-a family of time-indexed trees $\{T_s\}_{s \in \Time}$ be
+A \emph{haploid lineage process} is a family of lineage-valued random variables,
+  indexed by haploids (with subscript) and locus (with superscript),
 \[
-  \lim_{s \uparrow t} T_s :=
-  \bigcup_{s < t} \bigcap_{\substack{r \in [s, t) \\ r \in \Time}} T_r
+\{ \Lin^\ell_h : \ell \in \Loci, h \in \Haps \}
 \]
+where $\{ \Lin^\ell_h : h \in \Haps \}$, denoted $\Lin^\ell$,
+ is a complete lineage tree for every $\ell \in \Loci$.
 \end{defin}
 
-\begin{defin}
-A \emph{haploid lineage tree process} is a family of haploid-lineage-tree-valued random variables,
-indexed by a time (with subscript) and locus (with superscript),
+As a formally defined stochastic process, the index set of a haploid lineage process is
+$\Loci \times \Haps$. If one prefers to use $\Time$ as an index set, then one can
+consider
 \[
-\{ \Tree^\ell_t : t \in \Time, \ell \in \Loci \}
+  \{ \Lin^\ell_{(t, p)} : \ell \in \Loci, (t, p) \in \Haps = \Time \times \Places \}
 \]
-where for every $t \in \Time$, $\ell \in \Loci$, and $L \in \Tree^\ell_t$,
-\begin{enumerate}
-  \item $\At(L) \le t$,
-  \item $L \in \Tree^\ell_{\At(L)}$, and
-  \item the ancestral sublineage at time $t$ of $L$ is in $\lim_{s \uparrow t} \Tree^\ell_s$.
-\end{enumerate}
-\end{defin}
-
-As a stochastic process, a haploid lineage tree process is a time-indexed random variable taking values in the
-range of functions from loci $\Loci$ to haploid trees.
-
-\begin{defin}
-For all $h \in \Haps$,
-\[
-  \Lin^\ell_h := \begin{cases}
-    L & \text{if $L \in \Tree^\ell_{\At(h)}$ and $\Tip(L) = h$}  \\
-    \emptyset & \text{otherwise}
-  \end{cases}
-\]
-\end{defin}
+as a time-indexed family of random variable that take on values of
+functions from $\Loci \times \Places$ to lineages.
 
 
 \section{Related Work}
@@ -214,7 +196,7 @@ as equivalence relations (partitions) on the samples.
 
 Given a fixed locus $\ell \in \Loci$, and a sample population $S \subset \Haps$,
 where for some time $z \in \Time$, for all $a \in S$, $z = \At(a)$,
-a haploid lineage tree process defines a backward-time-indexed random
+a haploid lineage process defines a backward-time-indexed random
 variable $X_r$ that takes the same values as the Kingman $n$-coalescent, but not necessarily
 with the same probability distribution.
 The value of $X_r$ with $r \in [0, \infty)$ (in reverse time)
@@ -236,7 +218,7 @@ $n$-coalescent, but with some differences:
 \end{enumerate}
 
 Given a fixed locus $\ell \in \Loci$, a sample population $S \subset \Haps$, a haploid
-lineage tree process defines a \emph{shifted} forward-time-indexed random variable
+lineage process defines a \emph{shifted} forward-time-indexed random variable
 $Z_s$ that takes the same values as the genealogy tree structure in
 \cite{king_exact_2026}.
 The time index for $Z_s$ is relative to the root time $R \in \Time$, which is
@@ -260,7 +242,7 @@ as the tree structure process in \cite{king_exact_2026}.
 
 An ancestral recombination graph \cite{friedman_ancestral_1997}
 \cite{hein_gene_2005} \cite{wakeley_coalescent_2009} of a sampled
-population is embedded in any outcome of any haploid lineage tree process.
+population is embedded in any outcome of any haploid lineage process.
 We formally show the
 exact embedding using the gARG formalism \cite{wong_general_2024}.
 
