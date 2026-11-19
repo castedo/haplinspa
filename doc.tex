@@ -8,9 +8,10 @@
 
 \linenumbers
 
-\newcommand{\mathstop}{\text{ .}}
+\newcommand{\mathstop}{\text{.}}
 \newcommand {\R}{\mathbb{R}}
-\newcommand{\At}{\mathrm{At}}
+\newcommand{\Birth}{\mathrm{Birth}}
+\newcommand{\Death}{\mathrm{Death}}
 \newcommand{\Time}{\mathrm{Time}}
 \newcommand{\Places}{\mathrm{Places}}
 \newcommand{\Haps}{\mathrm{Haps}}
@@ -19,6 +20,7 @@
 \newcommand{\Tree}{\mathrm{Tree}}
 \newcommand{\Tip}{\mathrm{Tip}}
 \newcommand{\Pred}{\mathrm{Pred}}
+\newcommand{\Shift}{\mathrm{Shift}}
 \newcommand{\Lega}{\mathrm{Legacy}}
 \newcommand{\Nodes}{\mathrm{Nodes}}
 
@@ -81,7 +83,7 @@ We define a space of potential haploids as
 \]
 and a "birth" time function mapping $\Haps$ to $\R$ as
 \[
-  \At((t,x)) := t
+  \Birth((t,x)) := t
 \]
 
 Depending on the application, potential haploids might describe potential organisms, gametes, or spores.
@@ -99,28 +101,34 @@ genomic locus to a descendant haploid.
 \begin{defin}
 A \emph{haploid lineage} is a set $L$ of haploids such that,
 \begin{itemize}
-\item distinct members of $L$ have distinct birth times (i.e., strictly ordered by $\At$), and
-\item every non-empty subset of $L$ has a newest haploid (i.e., maximum under $\At$).
+\item distinct members of $L$ have distinct birth times (i.e., strictly ordered by $\Birth$), and
+\item every non-empty subset of $L$ has a newest haploid (i.e., maximum under $\Birth$).
 \end{itemize}
 \end{defin}
 
 An equivalent definition is that a \emph{haploid lineage} is a well-ordered set of haploids
-under the order of $-\At$ (backward-in-time).
+under the order of $-\Birth$ (backwards time).
 
 For convenience, we assume \emph{lineage} always means \emph{haploid lineage}.
 
 The empty set $\emptyset$ is the trivial lineage.
 
-The newest haploid in a non-empty lineage $L$ is denoted $\Tip(L)$.
-Let $\Pred(L)$ denote $\Tip(L / \{ \Tip(L) \})$, that is, the predecessor
-haploid of $h$ from which genetic information was copied at locus $\ell$.
+\begin{defin}
+Let $\Tip(L)$ denote the newest haploid in a non-empty lineage $L$.
+\end{defin}
 
-For convenience, extend $\At$ to any lineage $L$ by letting $\At(L) = \At(\Tip(L))$.
+\begin{defin}
+For any lineage $L$ with at least two member haploids,
+define the \emph{predecessor} of $L$ as
+\[
+  \Pred(L) := \Tip(L / \{ \Tip(L) \})
+\]
+\end{defin}
 
 \begin{defin}
 For any lineage $L$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
 \[
-\forall x \in L, y \in S \left( \At(x) < \At(y) \implies x \in S \right)
+\forall x \in L, y \in S \left( \Birth(x) < \Birth(y) \implies x \in S \right)
 \mathstop
 \]
 \end{defin}
@@ -183,6 +191,66 @@ consider
 as a time-indexed family of random variable that take on values of
 functions from $\Loci \times \Places$ to lineages.
 
+\begin{defin}
+A \emph{haploid death process} is a family of $\Time$-valued random
+  variables indexed by haploid (using function notation),
+\[
+  \left\{ \Death(h) \in \Time \mid h \in \Haps \right\}
+\]
+such that for all $h \in \Haps$
+\[
+  \Birth(h) \le \Death(h)
+  \mathstop
+\]
+\end{defin}
+
+\begin{defin}
+A haploid lineage process $\Lin$ and a haploid death process $\Death$ are
+  \emph{compatible} if and only if
+for all $\ell \in \Loci$ and $h \in \Haps$,
+\[
+  \Birth(\Tip(\Lin^\ell_h)) \le \Death(\Pred(\Lin^\ell_h))
+\]
+whenever $\Lin^\ell_h$ has more than one haploid.
+\end{defin}
+
+\begin{defin}
+A \emph{haploid lineage population process} is lineage-tree-valued random variable indexed by
+  locus and time
+\[
+  \Tree^\ell_t := \left\{
+    \Lin^\ell_h \mid t \le \Death(h), \, h \in \Haps
+  \right\}
+\]
+as determined by a compatible haploid lineage process $\Lin^\ell_h$
+  and a haploid death process $\Death$.
+\end{defin}
+
+
+\subsubsection{Retro-stationarity}
+
+\begin{defin}
+Define $\Shift$ as a function that shifts lineages and lineage trees in time where
+for lineages $L$,
+\[
+  \Shift(s, L) := \{ (s+t,p) \mid (t,p) \in L \}
+\]
+and for lineage trees $T$,
+\[
+  \Shift(s, T) := \left\{ \Shift(s, L) \mid L \in T \right\}
+  \mathstop
+\]
+\end{defin}
+
+\begin{defin}
+A haploid lineage population process is \emph{retro-stationary} if
+  the lineage-tree-valued stochastic process
+\[
+  \{ \Shift(-t, \Tree^\ell_t) \mid t \in \Time \}
+\]
+is stationary for every for every $\ell \in \Loci$.
+\end{defin}
+
 
 \section{Related Work}
 \label{sec:related-work}
@@ -195,14 +263,14 @@ As a time-indexed random variable, the $n$-coalescent takes values
 as equivalence relations (partitions) on the samples.
 
 Given a fixed locus $\ell \in \Loci$, and a sample population $S \subset \Haps$,
-where for some time $z \in \Time$, for all $a \in S$, $z = \At(a)$,
+where for some time $z \in \Time$, for all $a \in S$, $z = \Birth(a)$,
 a haploid lineage process defines a backward-time-indexed random
 variable $X_r$ that takes the same values as the Kingman $n$-coalescent, but not necessarily
 with the same probability distribution.
 The value of $X_r$ with $r \in [0, \infty)$ (in reverse time)
 is the equivalence relation defined by
 \[
-  \left\{ (a,b) \in S^2 : \At(\Lin^\ell_a \cap \Lin^\ell_b) \ge (z - r) \right\}
+  \left\{ (a,b) \in S^2 : \Birth(\Tip(\Lin^\ell_a \cap \Lin^\ell_b)) \ge (z - r) \right\}
 \]
 
 
@@ -223,7 +291,7 @@ $Z_s$ that takes the same values as the genealogy tree structure in
 \cite{king_exact_2026}.
 The time index for $Z_s$ is relative to the root time $R \in \Time$, which is
 \[
-  R := \At\left( \bigcap_{a \in S} \Lin^\ell_a \right)
+  R := \Birth\left( \Tip\left( \bigcap_{a \in S} \Lin^\ell_a \right) \right)
 \]
 and is itself a random variable. With ancestral lineages at time $t$
 of the samples $S$ denoted
