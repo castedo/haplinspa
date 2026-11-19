@@ -52,8 +52,10 @@ specific probabilities, such as the Kingman $n$-coalescent.
 Some motivations for such an underlying basis include:
 \begin{itemize}
   \item better understanding and evaluation of the assumptions linking mathematical and
-    biological models, and
-  \item deriving different mathematical results under different mathematical conditions.
+    biological models,
+  \item deriving different mathematical results under different mathematical conditions,
+  \item set-theoretic definitions that represent biological entities, and
+  \item ability to derive stochastic processes that can be stationary or Markovian.
 \end{itemize}
 
 The random variables in the \nameref{sec:definitions}~section model gene genealogies
@@ -70,18 +72,23 @@ the \nameref{sec:related-work}~section specifies the exact mathematical correspo
 \section{Definitions}
 \label{sec:definitions}
 
-A \emph{haploid lineage process} is a \emph{stochastic
-process}~\cite{ash_probability_2000, pishro_nik_2014}, which is a family of random
-variables indexed by a set, typically representing time.
+A \emph{haploid lineage population process} is built up from two simpler processes:
+\begin{itemize}
+  \item a haploid lineage process, and
+  \item a haploid death process.
+\end{itemize}
 
-The features required of a haploid lineage process are based on three givens:
-\begin{enumerate}
+Each of these processes is a \emph{stochastic process}~\cite{ash_probability_2000, pishro_nik_2014},
+which is a family of random variables indexed by a set, often representing time.
+The processes in this document are defined in terms of the following non-stochastic
+fixed givens:
+\begin{itemize}
 \item a set $\Time \subseteq \R$,
-\item a measurable space of chromosomal loci, denoted $\Loci$, and
-\item a measurable space of "birthplaces", denoted $\Places$.
-\end{enumerate}
+\item a (measurable) set $\Loci$, for chromosomal loci, and
+\item a (measurable) set $\Places$, for "birthplaces".
+\end{itemize}
 
-We define a space of potential haploids as
+We define the space of potential haploids as
 \[
 \Haps := \Time \times \Places
 \]
@@ -92,15 +99,18 @@ and a "birth" time function mapping $\Haps$ to $\R$ as
 
 Depending on the application, potential haploids might describe potential organisms, gametes, or spores.
 
-The index set of a haploid lineage process can be viewed as time, but it is more
-convenient to treat its index set as $\Loci \times \Haps$, which contains $\Time$ as
-a sub-index.
+
+\subsection{Elementary constructs}
+
+From the non-stochastic fixed givens, the elementary constructs of \emph{haploid
+lineages}, \emph{lineage trees}, and associated convenience functions are then used to define
+the stochastic processes in this document.
 
 
-\subsection{Haploid Lineage}
+\subsubsection{Haploid Lineage}
 
-A \emph{haploid lineage} represents all the haploids transmitting genetic information at a
-genomic locus to a descendant haploid.
+A \emph{haploid lineage} represents the haploids in a line of genetic transmission at a
+specific genomic locus in a descendant haploid.
 
 \begin{defin}
 A \emph{haploid lineage} is a set $L$ of haploids such that:
@@ -143,7 +153,7 @@ The \emph{shared lineage} of two lineages $A$ and $B$ is the intersection of $A$
 \end{defin}
 
 
-\subsection{Lineage Tree}
+\subsubsection{Lineage Tree}
 
 \begin{defin}
 A \emph{lineage tree} is a set $T$ of lineages where,
@@ -174,7 +184,7 @@ indexed by haploid $h \in \Haps$ such that
 \end{defin}
 
 
-\subsection{Stochastic Process}
+\subsection{Stochastic Processes}
 
 \begin{defin}
 A \emph{haploid lineage process} is a family of lineage-valued random variables,
@@ -268,7 +278,7 @@ as equivalence relations (partitions) on the samples.
 
 Given a fixed locus $\ell \in \Loci$, and a sample population $S \subset \Haps$,
 where for some time $z \in \Time$, for all $a \in S$, $z = \Birth(a)$,
-a haploid lineage process defines a backward-time-indexed random
+a haploid lineage process induces a backward-time-indexed random
 variable $X_r$ that takes the same values as the Kingman $n$-coalescent, but not necessarily
 with the same probability distribution.
 The value of $X_r$ with $r \in [0, \infty)$ (in reverse time)
