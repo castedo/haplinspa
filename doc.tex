@@ -1,6 +1,6 @@
 \addbibresource{references.bib}
 
-\title{Haploid Lineage Process}
+\title{Haploid Lineage Population Process}
 \author{E. Castedo Ellerman \orcidlink{0000-0002-5014-4809}}
 
 \begin{document}
@@ -27,24 +27,28 @@
 
 \begin{abstract}
 This document mathematically defines a type of stochastic process: a \emph{Haploid
-  Lineage Process}. It models lines of genetic transmission via haploid cells in a population.
-The motivation is to explicitly model a biological process that generates empirical genetic
-  data drawn from a reproducing population of organisms.
-In contrast to the Kingman $n$-coalescent, a Haploid Lineage Process is not defined
-  backward-in-time from a given set of haploid samples, but instead generates them
-  forward-in-time, akin to a branching process.
+  Lineage Population Process}.
+It explicitly models a biological process that generates empirical genetic data
+  transmitted via lineages of haploid cells in a reproducing population.
+In contrast to the Kingman $n$-coalescent,
+  which is defined backward in time from a given set of haploid samples,
+  a Haploid Lineage Population Process generates haploid samples forward in time,
+  akin to a branching process.
 \end{abstract}
 
 
 \section{Introduction}
 
-A \emph{stochastic process} is a mathematical model from probability theory that is
-widely used in many fields of applied mathematics.
-It consists of a family of time-indexed \emph{random variables}.
-We seek random variables taking values that clearly model a biological phenomenon. Our
-interest is in defining the type of those values, but not specifically their probabilities.
-We seek a shared basis for many specialized models that do define
-specific probability models, such as the Kingman $n$-coalescent.
+A \emph{stochastic process}~\cite{ash_probability_2000, pishro_nik_2014} is a
+mathematical model from probability theory that is widely used in many fields of applied
+mathematics.
+It consists of an indexed family of \emph{random variables}, typically with
+time as the index.
+This document defines random variables whose values clearly model a biological
+phenomenon. The focus is on defining the structure and values of these random variables,
+but not specifically their probabilities.
+They can serve as a general model from which many specialized models can define
+specific probabilities, such as the Kingman $n$-coalescent.
 Some motivations for such an underlying basis include:
 \begin{itemize}
   \item better understanding and evaluation of the assumptions linking mathematical and
@@ -99,15 +103,15 @@ A \emph{haploid lineage} represents all the haploids transmitting genetic inform
 genomic locus to a descendant haploid.
 
 \begin{defin}
-A \emph{haploid lineage} is a set $L$ of haploids such that,
+A \emph{haploid lineage} is a set $L$ of haploids such that:
 \begin{itemize}
-\item distinct members of $L$ have distinct birth times (i.e., strictly ordered by $\Birth$), and
-\item every non-empty subset of $L$ has a newest haploid (i.e., maximum under $\Birth$).
+\item distinct members of $L$ have distinct birth times (i.e., are strictly ordered by $\Birth$), and
+\item every non-empty subset of $L$ has a newest haploid (i.e., a maximum under $\Birth$).
 \end{itemize}
 \end{defin}
 
 An equivalent definition is that a \emph{haploid lineage} is a well-ordered set of haploids
-under the order of $-\Birth$ (backwards time).
+under the order of $-\Birth$ (backward in time).
 
 For convenience, we assume \emph{lineage} always means \emph{haploid lineage}.
 
@@ -121,7 +125,7 @@ Let $\Tip(L)$ denote the newest haploid in a non-empty lineage $L$.
 For any lineage $L$ with at least two member haploids,
 define the \emph{predecessor} of $L$ as
 \[
-  \Pred(L) := \Tip(L / \{ \Tip(L) \})
+  \Pred(L) := \Tip(L \setminus \{ \Tip(L) \})
 \]
 \end{defin}
 
@@ -142,7 +146,7 @@ The \emph{shared lineage} of two lineages $A$ and $B$ is the intersection of $A$
 \subsection{Lineage Tree}
 
 \begin{defin}
-A \emph{lineage tree} is a set $T$ of lineages where
+A \emph{lineage tree} is a set $T$ of lineages where,
 for all $A, B \in T$, the shared lineage $A \cap B$ is a sublineage of both $A$ and $B$.
 \end{defin}
 
@@ -153,8 +157,8 @@ A lineage tree $T$ is \emph{complete} if it contains every sublineage $S$ of any
 The empty set $\emptyset$ is the trivial lineage tree.
 
 \begin{theorem}
-  The function $\Tip$ restricted to the domain of a tree (a set of lineages)
-  is denoted ${\Tip|}_T$ and it is a one-to-one function.
+  The function $\Tip$ restricted to the domain of a tree (a set of lineages),
+  denoted ${\Tip|}_T$, is a one-to-one function.
 \end{theorem}
 
 \begin{defin}
@@ -188,7 +192,7 @@ consider
 \[
   \{ \Lin^\ell_{(t, p)} : \ell \in \Loci, (t, p) \in \Haps = \Time \times \Places \}
 \]
-as a time-indexed family of random variable that take on values of
+as a time-indexed family of random variables that take values as
 functions from $\Loci \times \Places$ to lineages.
 
 \begin{defin}
@@ -206,7 +210,7 @@ such that for all $h \in \Haps$
 
 \begin{defin}
 A haploid lineage process $\Lin$ and a haploid death process $\Death$ are
-  \emph{compatible} if and only if
+  \emph{compatible} if and only if,
 for all $\ell \in \Loci$ and $h \in \Haps$,
 \[
   \Birth(\Tip(\Lin^\ell_h)) \le \Death(\Pred(\Lin^\ell_h))
@@ -215,11 +219,11 @@ whenever $\Lin^\ell_h$ has more than one haploid.
 \end{defin}
 
 \begin{defin}
-A \emph{haploid lineage population process} is lineage-tree-valued random variable indexed by
+A \emph{haploid lineage population process} is a lineage-tree-valued random variable indexed by
   locus and time
 \[
   \Tree^\ell_t := \left\{
-    \Lin^\ell_h \mid t \le \Death(h), \, h \in \Haps
+    \Lin^\ell_h \mid \Birth(h) \le t < \Death(h), \, h \in \Haps
   \right\}
 \]
 as determined by a compatible haploid lineage process $\Lin^\ell_h$
@@ -230,7 +234,7 @@ as determined by a compatible haploid lineage process $\Lin^\ell_h$
 \subsubsection{Retro-stationarity}
 
 \begin{defin}
-Define $\Shift$ as a function that shifts lineages and lineage trees in time where
+Define $\Shift$ as a function that shifts lineages and lineage trees in time, where
 for lineages $L$,
 \[
   \Shift(s, L) := \{ (s+t,p) \mid (t,p) \in L \}
@@ -248,7 +252,7 @@ A haploid lineage population process is \emph{retro-stationary} if
 \[
   \{ \Shift(-t, \Tree^\ell_t) \mid t \in \Time \}
 \]
-is stationary for every for every $\ell \in \Loci$.
+is stationary for every $\ell \in \Loci$.
 \end{defin}
 
 
@@ -322,10 +326,10 @@ $h \in \Haps$ for a sample population $S \subseteq \Haps$ to be
 \]
 
 This genetic legacy is the genetic material that survives in the
-sample population $S$ originally copied from ancestral haploid $h$
+sample population $S$ and was originally copied from ancestral haploid $h$
 (with or without mutations).
 
-Genetic legacy for a sample population $S$ induces the following
+The genetic legacy for a sample population $S$ induces the following
 equivalence relation over pairs of haploids $h_1$ and $h_2$ in
 $\Haps$:
 \[
