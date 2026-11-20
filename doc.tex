@@ -206,16 +206,16 @@ where $\{ \Lin_h^\ell : h \in \Haps, \, \ell \in \Loc \}$
 \end{defin}
 
 As a formally defined stochastic process, the index set of a lineage process is
-$\Haps \times \Loc$. If one prefers to use $\Time$ as an index set, then one can
-re-index to a "birth tree" process
+$\Haps \times \Loc$. However, a lineage process induces a \emph{birth tree process} that
+is time-indexed:
 \[
   \big\{ B_t  \big\}_{t \in \Time} :=
   \left\{
     \{ \Lin_{(t, p)}^\ell \mid p \in \Place, \, \ell \in \Loc \}
   \right\}_{t \in \Time}
 \]
-as a time-indexed family of random variables that take values
-of a lineage tree with only lineages "born" at time $t$.
+where each random variable value is a lineage tree containing only lineages "born" at
+time $t$.
 
 \begin{defin}
 A \emph{haploid death process} is a family of $\Time$-valued random
@@ -262,24 +262,20 @@ as determined by a compatible lineage process $\Lin^p_h$
 
 \begin{defin}
 Define $\Shift$ as a function that shifts lineages and lineage trees in time, where
-for lineages $L$,
-\[
-  \Shift(s, L) := \{ ((s+t,p),\ell) \mid ((t,p),\ell) \in L \}
-\]
-and for lineage trees $T$,
-\[
-  \Shift(s, T) := \left\{ \Shift(s, L) \mid L \in T \right\}
+for any lineage $L$, lineage tree $T$, and $\delta \in \R$:
+\begin{align*}
+  \Shift(L, \delta) &:= \{ ((t+\delta,p),\ell) \mid ((t,p),\ell) \in L \}  \\
+  \Shift(T, \delta) &:= \left\{ \Shift(L, \delta) \mid L \in T \right\}
   \mathstop
-\]
+\end{align*}
 \end{defin}
 
 \begin{defin}
-A haploid lineage population process is \emph{retro-stationary} if
-  the lineage-tree-valued stochastic process
+A lineage-tree-valued process is \emph{retro-stationary} if
 \[
-  \{ \Shift(-t, \Tree^\ell_t) \mid t \in \Time \}
+  \Big\{ \Shift(T_t, -t) \Big\}_{t \in \Time}
 \]
-is stationary for every $\ell \in \Loc$.
+is stationary.
 \end{defin}
 
 
@@ -347,7 +343,7 @@ It models recombination due to crossover and gene conversion, but not translocat
 as that found in transposable elements (TEs).
 In terms of site lineages, this means a constant genomic location for all the sites within
 any given lineage (almost surely).
-A haploid lineage population process with only homologous recombination
+A lineage process with only homologous recombination
 has an embedded
 ancestral recombination graph \cite{friedman_ancestral_1997,
 hein_gene_2005, wakeley_coalescent_2009} for a sampled
