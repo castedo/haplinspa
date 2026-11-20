@@ -13,9 +13,10 @@
 \newcommand{\Birth}{\mathrm{Birth}}
 \newcommand{\Death}{\mathrm{Death}}
 \newcommand{\Time}{\mathrm{Time}}
-\newcommand{\Places}{\mathrm{Places}}
-\newcommand{\Haps}{\mathrm{Haps}}
-\newcommand{\Loci}{\mathrm{Loci}}
+\newcommand{\Place}{\mathrm{Place}}
+\newcommand{\Haps}{\mathrm{Hap}}
+\newcommand{\Loc}{\mathrm{Loc}}
+\newcommand{\Site}{\mathrm{Site}}
 \newcommand{\Lin}{\mathrm{Lin}}
 \newcommand{\Tree}{\mathrm{Tree}}
 \newcommand{\Tip}{\mathrm{Tip}}
@@ -55,7 +56,7 @@ Some motivations for such an underlying basis include:
     biological models,
   \item deriving different mathematical results under different mathematical conditions,
   \item set-theoretic definitions that represent biological entities, and
-  \item ability to derive stochastic processes that can be stationary or Markovian.
+  \item the ability to derive stochastic processes that can be stationary or Markovian.
 \end{itemize}
 
 The random variables in the \nameref{sec:definitions}~section model gene genealogies
@@ -74,7 +75,7 @@ the \nameref{sec:related-work}~section specifies the exact mathematical correspo
 
 A \emph{haploid lineage population process} is built up from two simpler processes:
 \begin{itemize}
-  \item a haploid lineage process, and
+  \item a lineage process, and
   \item a haploid death process.
 \end{itemize}
 
@@ -84,13 +85,13 @@ The processes in this document are defined in terms of the following non-stochas
 fixed givens:
 \begin{itemize}
 \item a set $\Time \subseteq \R$,
-\item a (measurable) set $\Loci$, for chromosomal loci, and
-\item a (measurable) set $\Places$, for "birthplaces".
+\item a (measurable) set $\Place$, for "birthplaces", and
+\item a (measurable) set $\Loc$, for genomic locations.
 \end{itemize}
 
-We define the space of potential haploids as
+We define the set of potential haploids as
 \[
-\Haps := \Time \times \Places
+\Haps := \Time \times \Place
 \]
 and a "birth" time function mapping $\Haps$ to $\R$ as
 \[
@@ -99,36 +100,44 @@ and a "birth" time function mapping $\Haps$ to $\R$ as
 
 Depending on the application, potential haploids might describe potential organisms, gametes, or spores.
 
+We also define the set of "haploid sites" as
+\[
+\Site := \Haps \times \Loc
+\]
+and extend $\Birth$ to sites as
+\[
+  \Birth((h,\ell)) := \Birth(h)
+\]
+Sites represent potential nucleotide base locations on a chromosome of a specific haploid.
+
 
 \subsection{Elementary constructs}
 
-From the non-stochastic fixed givens, the elementary constructs of \emph{haploid
-lineages}, \emph{lineage trees}, and associated convenience functions are then used to define
+From the non-stochastic fixed givens, the elementary constructs of \emph{lineages},
+\emph{lineage trees}, and associated convenience functions are then used to define
 the stochastic processes in this document.
 
 
-\subsubsection{Haploid Lineage}
+\subsubsection{Lineage}
 
-A \emph{haploid lineage} represents the haploids in a line of genetic transmission at a
-specific genomic locus in a descendant haploid.
+A \emph{lineage} represents the haploid sites in a line of genetic transmission
+to a descendant haploid site.
 
 \begin{defin}
-A \emph{haploid lineage} is a set $L$ of haploids such that:
+A \emph{lineage} is a set $L$ of sites such that:
 \begin{itemize}
 \item distinct members of $L$ have distinct birth times (i.e., are strictly ordered by $\Birth$), and
-\item every non-empty subset of $L$ has a newest haploid (i.e., a maximum under $\Birth$).
+\item every non-empty subset of $L$ has a newest site (i.e., a maximum under $\Birth$).
 \end{itemize}
 \end{defin}
 
-An equivalent definition is that a \emph{haploid lineage} is a well-ordered set of haploids
+An equivalent definition is that a \emph{lineage} is a well-ordered set of sites
 under the order of $-\Birth$ (backward in time).
-
-For convenience, we assume \emph{lineage} always means \emph{haploid lineage}.
 
 The empty set $\emptyset$ is the trivial lineage.
 
 \begin{defin}
-Let $\Tip(L)$ denote the newest haploid in a non-empty lineage $L$.
+Let $\Tip(L)$ denote the newest site in a non-empty lineage $L$.
 \end{defin}
 
 \begin{defin}
@@ -142,7 +151,7 @@ define the \emph{predecessor} of $L$ as
 \begin{defin}
 For any lineage $L$, a subset $S \subset L$ is a \emph{sublineage} of $L$ iff
 \[
-\forall x \in L, y \in S \left( \Birth(x) < \Birth(y) \implies x \in S \right)
+\forall x \in L, y \in S \Big( \Birth(x) < \Birth(y) \implies x \in S \Big)
 \mathstop
 \]
 \end{defin}
@@ -173,11 +182,11 @@ The empty set $\emptyset$ is the trivial lineage tree.
 
 \begin{defin}
 For any lineage tree $T$,
-let $T_h$ denote a lineage with $T$ as a family of lineages
-indexed by haploid $h \in \Haps$ such that
+let $T_h^\ell$ denote a lineage with $T$ used as a family of lineages
+indexed by haploid $h \in \Haps$ and $\ell \in \Loc$ such that
 \[
-  T_h := \begin{cases}
-    {\Tip|}_T^{-1}(h) & \text{if $h \in \{ \Tip(L) \mid L \in T \}$} \\
+  T_h^\ell := \begin{cases}
+    {\Tip|}_T^{-1}((h,\ell)) & \text{if $(h,\ell) \in \{ \Tip(L) \mid L \in T \}$} \\
     \emptyset & \text{otherwise}
   \end{cases}
 \]
@@ -187,29 +196,32 @@ indexed by haploid $h \in \Haps$ such that
 \subsection{Stochastic Processes}
 
 \begin{defin}
-A \emph{haploid lineage process} is a family of lineage-valued random variables,
-  indexed by haploids (with subscript) and locus (with superscript),
+A \emph{lineage process} is a family of lineage-valued random variables,
+  indexed by haploids (with subscript) and genomic location (with superscript),
 \[
-\{ \Lin^\ell_h : \ell \in \Loci, h \in \Haps \}
+  \Big\{ \Lin_h^\ell \Big\}_{h \in \Haps, \, \ell \in \Loc}
 \]
-where $\{ \Lin^\ell_h : h \in \Haps \}$, denoted $\Lin^\ell$,
- is a complete lineage tree for every $\ell \in \Loci$.
+where $\{ \Lin_h^\ell : h \in \Haps, \, \ell \in \Loc \}$
+ is a complete lineage tree.
 \end{defin}
 
-As a formally defined stochastic process, the index set of a haploid lineage process is
-$\Loci \times \Haps$. If one prefers to use $\Time$ as an index set, then one can
-consider
+As a formally defined stochastic process, the index set of a lineage process is
+$\Haps \times \Loc$. If one prefers to use $\Time$ as an index set, then one can
+re-index to a "birth tree" process
 \[
-  \{ \Lin^\ell_{(t, p)} : \ell \in \Loci, (t, p) \in \Haps = \Time \times \Places \}
+  \big\{ B_t  \big\}_{t \in \Time} :=
+  \left\{
+    \{ \Lin_{(t, p)}^\ell \mid p \in \Place, \, \ell \in \Loc \}
+  \right\}_{t \in \Time}
 \]
-as a time-indexed family of random variables that take values as
-functions from $\Loci \times \Places$ to lineages.
+as a time-indexed family of random variables that take values
+of a lineage tree with only lineages "born" at time $t$.
 
 \begin{defin}
 A \emph{haploid death process} is a family of $\Time$-valued random
   variables indexed by haploid (using function notation),
 \[
-  \left\{ \Death(h) \in \Time \mid h \in \Haps \right\}
+  \Big\{ \Death(h) \Big\}_{h \in \Haps}
 \]
 such that for all $h \in \Haps$
 \[
@@ -218,25 +230,30 @@ such that for all $h \in \Haps$
 \]
 \end{defin}
 
-\begin{defin}
-A haploid lineage process $\Lin$ and a haploid death process $\Death$ are
-  \emph{compatible} if and only if,
-for all $\ell \in \Loci$ and $h \in \Haps$,
+As with $\Birth$, extend $\Death$ to any site $(h,\ell) \in \Site$ as
 \[
-  \Birth(\Tip(\Lin^\ell_h)) \le \Death(\Pred(\Lin^\ell_h))
+  \Death((h,\ell)) := \Death(h)
 \]
-whenever $\Lin^\ell_h$ has more than one haploid.
+
+\begin{defin}
+A lineage process $\Lin$ and a haploid death process $\Death$ are
+  \emph{compatible} if and only if,
+for all $h \in \Haps$ and $\ell \in \Loc$,
+\[
+  \Birth(\Tip(\Lin_h^\ell)) \le \Death(\Pred(\Lin_h^\ell))
+\]
+whenever $\Lin_h^\ell$ has more than one haploid.
 \end{defin}
 
 \begin{defin}
 A \emph{haploid lineage population process} is a lineage-tree-valued random variable indexed by
-  locus and time
+  time
 \[
-  \Tree^\ell_t := \left\{
-    \Lin^\ell_h \mid \Birth(h) \le t < \Death(h), \, h \in \Haps
+  \Tree_t := \left\{
+    \Lin_h^\ell \mid \Birth(h) \le t < \Death(h), \, h \in \Haps, \ell \in \Loc
   \right\}
 \]
-as determined by a compatible haploid lineage process $\Lin^\ell_h$
+as determined by a compatible lineage process $\Lin^p_h$
   and a haploid death process $\Death$.
 \end{defin}
 
@@ -247,7 +264,7 @@ as determined by a compatible haploid lineage process $\Lin^\ell_h$
 Define $\Shift$ as a function that shifts lineages and lineage trees in time, where
 for lineages $L$,
 \[
-  \Shift(s, L) := \{ (s+t,p) \mid (t,p) \in L \}
+  \Shift(s, L) := \{ ((s+t,p),\ell) \mid ((t,p),\ell) \in L \}
 \]
 and for lineage trees $T$,
 \[
@@ -262,7 +279,7 @@ A haploid lineage population process is \emph{retro-stationary} if
 \[
   \{ \Shift(-t, \Tree^\ell_t) \mid t \in \Time \}
 \]
-is stationary for every $\ell \in \Loci$.
+is stationary for every $\ell \in \Loc$.
 \end{defin}
 
 
@@ -276,15 +293,15 @@ as a stochastic process terminating at a sample of haploids.
 As a time-indexed random variable, the $n$-coalescent takes values
 as equivalence relations (partitions) on the samples.
 
-Given a fixed locus $\ell \in \Loci$, and a sample population $S \subset \Haps$,
+Given only one genomic location $\Loc = \{ \ell \}$ and a sample population $S \subset \Haps$,
 where for some time $z \in \Time$, for all $a \in S$, $z = \Birth(a)$,
-a haploid lineage process induces a backward-time-indexed random
+a lineage process induces a backward-time-indexed random
 variable $X_r$ that takes the same values as the Kingman $n$-coalescent, but not necessarily
 with the same probability distribution.
 The value of $X_r$ with $r \in [0, \infty)$ (in reverse time)
 is the equivalence relation defined by
 \[
-  \left\{ (a,b) \in S^2 : \Birth(\Tip(\Lin^\ell_a \cap \Lin^\ell_b)) \ge (z - r) \right\}
+  \left\{ (a,b) \in S^2 : \Birth(\Tip(\Lin_a^\ell \cap \Lin_b^\ell)) \ge (z - r) \right\}
 \]
 
 
@@ -299,7 +316,8 @@ $n$-coalescent, but with some differences:
   \item time zero is fixed to the root of the genealogical tree.
 \end{enumerate}
 
-Given a fixed locus $\ell \in \Loci$, a sample population $S \subset \Haps$, a haploid
+Given only one genomic location $\Loc = \{ \ell \}$ and
+a sample population $S \subset \Haps$, a haploid
 lineage process defines a \emph{shifted} forward-time-indexed random variable
 $Z_s$ that takes the same values as the genealogy tree structure in
 \cite{king_exact_2026}.
@@ -322,16 +340,23 @@ as the tree structure process in \cite{king_exact_2026}.
 
 \subsection{Ancestral Recombination Graph (ARG)}
 
-An ancestral recombination graph \cite{friedman_ancestral_1997}
-\cite{hein_gene_2005} \cite{wakeley_coalescent_2009} of a sampled
-population is embedded in any outcome of any haploid lineage process.
-We formally show the
-exact embedding using the gARG formalism \cite{wong_general_2024}.
+An Ancestral Recombination Graph (ARG), as formalized as a gARG in
+\cite{wong_general_2024}, models homologous recombination, in other words, only genetic
+transmission where the genomic location remains constant.
+It models recombination due to crossover and gene conversion, but not translocation, such
+as that found in transposable elements (TEs).
+In terms of site lineages, this means a constant genomic location for all the sites within
+any given lineage (almost surely).
+A haploid lineage population process with only homologous recombination
+has an embedded
+ancestral recombination graph \cite{friedman_ancestral_1997,
+hein_gene_2005, wakeley_coalescent_2009} for a sampled
+population.
 
 We start by defining the \emph{genetic legacy} of an ancestral haploid
 $h \in \Haps$ for a sample population $S \subseteq \Haps$ to be
 \[
-  \Lega(h, S) := \{ (\ell, d) \in \Loci \times S : h \in \Lin^\ell_d \}
+  \Lega(h, S) := \{ (\ell, d) \in \Loc \times S : h \in \Lin^\ell_d \}
 \mathstop
 \]
 
@@ -365,7 +390,7 @@ to set the gARG nodes (vertices) to be the equivalence classes:
 The (unannotated) graph edges of the gARG are chosen as child-parent
 node pairs $(C, P) \in \Nodes(S)^2$ where
 \[
-  \Pred(\Lin^\ell_h) \in P \text{ for some $h \in C$ and some $\ell \in \Loci$ .}
+  \Pred(\Lin^\ell_h) \in P \text{ for some $h \in C$ and some $\ell \in \Loc$ .}
 \]
 
 In the gARG, annotations are added for each graph edge (pair of child
@@ -376,7 +401,7 @@ which genetic information has been transmitted into the sample
 population $S$. With this interpretation, the annotation for edge
 $(C,P)$ is
 \[
-  \{ \ell \in \Loci :
+  \{ \ell \in \Loc :
      C \subseteq \Lin^\ell_h \text{ and } P \subseteq \Lin^\ell_h \text{ for some $h \in S$}
   \}
 \mathstop
