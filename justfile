@@ -10,6 +10,9 @@ build:
     main.tex
   cp preview.html _preview/index.html
 
+contained-build:
+  podman run --rm -it -v=$PWD:/mnt -w=/mnt $(cat container-image.txt) just build
+
 clean:
   rm -rf _build
   rm -rf _preview

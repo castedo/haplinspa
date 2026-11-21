@@ -14,8 +14,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Read container image reference from file
+        id: read-image
+        run: |
+          IMAGE="$(cat container-image.txt)"
+          if [[ $IMAGE != docker://* ]]; then
+            echo "::error file=container-image.txt::Not a 'docker:://*' reference inside container-image.txt"
+            exit 1
+          fi
+          echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
+
       - name: "Generated PDF"
-        uses: docker://registry.gitlab.com/ellerman/nest/pub/core:26462-9be
+        uses: ${{ steps.read-image.outputs.image }}
         with:
           args: just build
 
