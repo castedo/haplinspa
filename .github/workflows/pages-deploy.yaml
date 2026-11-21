@@ -25,7 +25,7 @@ jobs:
           echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
 
       - name: "Generated PDF"
-        uses: ${{ steps.read-image.outputs.image }}
+        uses: "${{ steps.read-image.outputs.image }}"
         with:
           args: just build
 
