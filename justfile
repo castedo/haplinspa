@@ -11,7 +11,10 @@ build:
   cp preview.html _preview/index.html
 
 contained-build:
-  podman run --rm -it -v=$PWD:/mnt -w=/mnt $(cat container-image.txt) just build
+  # .github/workflows/pages-deploy.yaml also has container image reference
+  podman run --rm -it -v=$PWD:/mnt -w=/mnt \
+    registry.gitlab.com/ellerman/nest/pub/core:2646-be4
+    just build
 
 clean:
   rm -rf _build
