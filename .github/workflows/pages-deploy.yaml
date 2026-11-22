@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: "Generated PDF"
-        uses: docker://registry.gitlab.com/ellerman/nest/pub/core:2646-be4
+        uses: docker://registry.gitlab.com/ellerman/nest/pub/core:2647-fd5
         with:
           args: just build
 
