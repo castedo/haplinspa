@@ -180,13 +180,13 @@ The empty set $\emptyset$ is the trivial lineage tree.
 \begin{defin}
 Define the \emph{haploid population} of a lineage tree $T$ to be:
 \[
-  \Pop(T) := \{ \Tip(L) \mid L \in T \}
+  \Pop(T) := \{ h \mid (h, \ell) = \Tip(L), \, L \in T, \, \ell \in \Loc \}
 \]
 \end{defin}
 
 \begin{theorem}
   The function $\Tip$ restricted to the domain of a tree (a set of lineages),
-  denoted ${\Tip|}_T$, is a one-to-one function from $T$ to $\Pop(T)$.
+  denoted ${\Tip|}_T$, is a one-to-one function.
 \end{theorem}
 
 \begin{defin}
@@ -195,7 +195,7 @@ let $T_h^\ell$ denote a lineage with $T$ used as a family of lineages
 indexed by haploid $h \in \Hap$ and $\ell \in \Loc$ such that
 \[
   T_h^\ell := \begin{cases}
-    {\Tip|}_T^{-1}((h,\ell)) & \text{if $(h,\ell) \in \Pop(T)$} \\
+    {\Tip|}_T^{-1}((h,\ell)) & \text{if $(h,\ell) \in \{ \Tip(L) \mid L \in T \}$} \\
     \emptyset & \text{otherwise}
   \end{cases}
 \]
