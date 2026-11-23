@@ -1,6 +1,6 @@
 \addbibresource{references.bib}
 
-\title{Haploid Population Tree Process}
+\title{Haploid Lineage Population Process}
 \author{E. Castedo Ellerman \orcidlink{0000-0002-5014-4809}}
 
 \begin{document}
@@ -28,12 +28,12 @@
 
 \begin{abstract}
 This document mathematically defines a type of stochastic process: a \emph{Haploid
-  Population Tree Process}.
+  Lineage Population Process}.
 It explicitly models a biological process that generates empirical genetic data
   transmitted via lineages of haploid cells in a reproducing population.
 In contrast to the Kingman $n$-coalescent,
   which is defined backward in time from a given set of haploid samples,
-  a Haploid Population Tree Process generates haploid samples forward in time,
+  a Haploid Lineage Population Process generates haploid samples forward in time,
   akin to a branching process.
 \end{abstract}
 
@@ -73,9 +73,9 @@ the \nameref{sec:related-work}~section specifies the exact mathematical correspo
 \section{Definitions}
 \label{sec:definitions}
 
-A \emph{haploid population tree process} is built up from two simpler processes:
+A \emph{haploid lineage population process} is built up from two simpler processes:
 \begin{itemize}
-  \item a haploid lineage process, and
+  \item a lineage process, and
   \item a haploid death process.
 \end{itemize}
 
@@ -196,7 +196,7 @@ indexed by haploid $h \in \Haps$ and $\ell \in \Loc$ such that
 \subsection{Stochastic Processes}
 
 \begin{defin}
-  A \emph{haploid lineage process} is a family of lineage-valued random variables,
+A \emph{lineage process} is a family of lineage-valued random variables,
   indexed by haploids (with subscript) and genomic location (with superscript),
 \[
   \Big\{ \Lin_h^\ell \Big\}_{h \in \Haps, \, \ell \in \Loc}
@@ -204,8 +204,6 @@ indexed by haploid $h \in \Haps$ and $\ell \in \Loc$ such that
 where $\{ \Lin_h^\ell : h \in \Haps, \, \ell \in \Loc \}$
  is a complete lineage tree.
 \end{defin}
-
-For convenience, we write just \emph{lineage process} to refer to a haploid lineage process.
 
 As a formally defined stochastic process, the index set of a lineage process is
 $\Haps \times \Loc$. However, a lineage process induces a \emph{birth tree process} that
@@ -248,7 +246,7 @@ whenever $\Lin_h^\ell$ has more than one haploid.
 \end{defin}
 
 \begin{defin}
-A \emph{haploid population tree process} is a lineage-tree-valued random variable indexed by
+A \emph{haploid lineage population process} is a lineage-tree-valued random variable indexed by
   time
 \[
   \Tree_t := \left\{
