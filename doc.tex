@@ -11,6 +11,7 @@
 \linenumbers
 
 \newcommand{\mathstop}{\text{.}}
+
 \newcommand{\Birth}{\mathrm{Birth}}
 \newcommand{\Death}{\mathrm{Death}}
 \newcommand{\Time}{\mathrm{Time}}
@@ -24,6 +25,7 @@
 \newcommand{\Pop}{\mathrm{Pop}}
 \newcommand{\Pred}{\mathrm{Pred}}
 \newcommand{\Shift}{\mathrm{Shift}}
+
 \newcommand{\Lega}{\mathrm{Legacy}}
 \newcommand{\Nodes}{\mathrm{Nodes}}
 
@@ -78,7 +80,7 @@ the \nameref{sec:related-work}~section specifies the exact mathematical correspo
 A \emph{haploid lineage population process} is built up from two simpler processes:
 \begin{itemize}
   \item a lineage process, and
-  \item a haploid death process.
+  \item a death process.
 \end{itemize}
 
 Each of these processes is a \emph{stochastic process}~\cite{ash_probability_2000, pishro_nik_2014},
@@ -97,7 +99,8 @@ We define the set of potential haploids as
 \]
 and a "birth" time function mapping $\Hap$ to $\R$ as
 \[
-  \Birth((t,x)) := t
+  \Birth((t,p)) := t
+  \mathstop
 \]
 
 Depending on the application, potential haploids might describe potential organisms, gametes, or spores.
@@ -109,6 +112,7 @@ We also define the set of "haploid sites" as
 and extend $\Birth$ to sites as
 \[
   \Birth((h,\ell)) := \Birth(h)
+  \mathstop
 \]
 Sites represent potential nucleotide base locations on a chromosome of a specific haploid.
 
@@ -227,7 +231,7 @@ where each random variable value is a lineage tree containing only lineages "bor
 time $t$.
 
 \begin{defin}
-A \emph{haploid death process} is a family of $\Time$-valued random
+A \emph{death process} is a family of $\Time$-valued random
   variables indexed by haploid (using function notation),
 \[
   \Big\{ \Death(h) \Big\}_{h \in \Hap}
@@ -245,7 +249,7 @@ As with $\Birth$, extend $\Death$ to any site $(h,\ell) \in \Site$ as
 \]
 
 \begin{defin}
-A lineage process $\Lin$ and a haploid death process $\Death$ are
+A lineage process $\Lin$ and a death process $\Death$ are
   \emph{compatible} if and only if,
 for all $h \in \Hap$ and $\ell \in \Loc$,
 \[
@@ -263,7 +267,7 @@ A \emph{haploid lineage population process} is a lineage-tree-valued random vari
   \right\}
 \]
 as determined by a compatible lineage process $\Lin^p_h$
-  and a haploid death process $\Death$.
+  and a death process $\Death$.
 \end{defin}
 
 \begin{defin}
